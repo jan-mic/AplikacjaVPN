@@ -1,14 +1,42 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window x:Class="VpnApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:VpnApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="VPN Setup Wizard"
+        Height="600"
+        Width="500"
+        ResizeMode="NoResize">
     <Grid>
-        <TextBlock Name="tbStatus" FontSize="40"/>
-        <Button Name="btnToggleRun" Width="100" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Run" FontSize="20" Click="btnToggleRun_Click"/>
+        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Row="0" Fill="LightGray"/>
+        <Rectangle Grid.Row="1" Fill="LightGray"/>
+        <Rectangle Grid.Row="2" Fill="LightGray"/>
+
+        <TextBlock Name="tbHeader" FontSize="20" Text="VPN Setup Wizard" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+
+        <Line Grid.Row="0"  X1="0" Y1="50" X2="500" Y2="50" Stroke="Gray" StrokeThickness="1" Margin="10,0,10,0"/>
+        <Line Grid.Row="2"  X1="0" Y1="0" X2="500" Y2="0" Stroke="Gray" StrokeThickness="1" Margin="10,0,10,0"/>
+
+        <Button Grid.Row="2" Name="btnNext" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Content="Next" Click="btnNext_Click" />
+        <Button Grid.Row="2" Name="btnBack" Width="80" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,100,0" Content="Back" Click="btnBack_Click" />
+
+        <Frame x:Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+
+       
+
+
+
+
 
     </Grid>
 </Window>
