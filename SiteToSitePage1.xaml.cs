@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace VpnApplication
 {
     /// <summary>
-    /// Interaction logic for SiteToSitePage.xaml
+    /// Interaction logic for SiteToSitePage1.xaml
     /// </summary>
-    public partial class SiteToSitePage : Page
+    public partial class SiteToSitePage1 : Page
     {
-        public SiteToSitePage()
+        public SiteToSitePage1()
         {
             InitializeComponent();
         }

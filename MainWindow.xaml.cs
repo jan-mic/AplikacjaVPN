@@ -15,7 +15,7 @@ namespace VpnApplication
 
         StartPage startPage = new StartPage();
         RemoteAccessPage remoteAccessPage = new RemoteAccessPage();
-        SiteToSitePage siteToSidePage = new SiteToSitePage();
+        SiteToSitePage1 siteToSidePage1 = new SiteToSitePage1();
         SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
 
         public MainWindow()
@@ -45,8 +45,8 @@ namespace VpnApplication
             {
                 if (startPage.cbSiteToSite.IsChecked == true)
                 {
-                    currentPage = "siteToSite";
-                    mainFrame.Content = siteToSidePage;
+                    currentPage = "siteToSite1";
+                    mainFrame.Content = siteToSidePage1;
                     btnBack.Visibility = Visibility.Visible;
                     
                 }
@@ -57,12 +57,12 @@ namespace VpnApplication
                     btnBack.Visibility = Visibility.Visible;
                 }
             }
-            else if (currentPage == "siteToSite")
+            else if (currentPage == "siteToSite1")
             {
                 currentPage = "siteToSite2";
                 mainFrame.Content = siteToSitePage2;
             }
-
+            
 
         }
 
@@ -75,7 +75,7 @@ namespace VpnApplication
             }
             else if(currentPage == "siteToSite2")
             {
-                currentPage = "siteToSite";
+                currentPage = "siteToSite1";
             }
 
 
