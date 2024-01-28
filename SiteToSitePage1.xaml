@@ -29,12 +29,11 @@
         <TextBlock Grid.Row="0" Name="tbSelectVPN" Text="Phase 1 settings" FontWeight="Bold" FontSize="16" Margin="10,10,0,0"/>
         <TextBlock Grid.Row="1" Name="tbPriority" Text="Policy priority" FontSize="14" Margin="10,10,0,0"/>
         <TextBlock Grid.Row="1" Name="tbEncryptionAlgorithm" Text="Encryption algorithm" FontSize="14" Margin="10,35,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbHashAlgorithm" Text="Hash algorithm" FontSize="14" Margin="10,60,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbDiffieHellman" Text="Diffie Hellman group" FontSize="14" Margin="10,85,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbLifeTime" Text="SA Life time" FontSize="14" Margin="10,110,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbAuthentication" Text="Authentication" FontSize="14" FontWeight="Bold" Margin="10,150,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbAuthenticationAlgorithm" Text="Authentication algorithm" FontSize="14" Margin="10,60,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbDiffieHellman" Text="Key Group" FontSize="14" Margin="10,85,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbLifeTime" Text="SA Life Time" FontSize="14" Margin="10,110,0,0"/>
 
-        
+
         <TextBox Name="tBoxPriority"  Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0"/>
 
         <ComboBox Name="cbEncryption" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0">
@@ -61,8 +60,10 @@
 
 
         <!-- authentication -->
-        <TextBlock Grid.Row="1" Name="tbPreSharedKey" Text="Preshared key" FontSize="14" Margin="10,175,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbPeerIP" Text="Peer address (IP/Mask)" FontSize="14" Margin="10,200,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbAuthentication" Text="Authentication" FontSize="14" FontWeight="Bold" Margin="10,150,0,0"/>
+        
+        <TextBlock Grid.Row="1" Name="tbPreSharedKey" Text="Preshared Key" FontSize="14" Margin="10,175,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbPeerIP" Text="Peer Address (IP/Mask)" FontSize="14" Margin="10,200,0,0"/>
 
         <TextBox Name="tBoxPreSharedKey" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,175,0,0"/>
 

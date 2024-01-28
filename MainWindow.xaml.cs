@@ -68,7 +68,7 @@ namespace VpnApplication
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            if(currentPage == "siteToSite" || currentPage == "remoteAccess")
+            if(currentPage == "siteToSite1" || currentPage == "remoteAccess")
             {
                 btnBack.Visibility = Visibility.Hidden;
                 currentPage = "startPage";
