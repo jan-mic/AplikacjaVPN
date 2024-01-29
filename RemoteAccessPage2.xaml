@@ -5,23 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VpnApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="510" d:DesignWidth="500"
+      d:DesignHeight="510" d:DesignWidth="420"
       Title="RemoteAccessPage2">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="210"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="270"/>
         </Grid.RowDefinitions>
 
         <Rectangle Grid.Row="1" Grid.Column="0" Fill="LightGray"/>
         <Rectangle Grid.Row="1" Grid.Column="1" Fill="LightGray"/>
         <Rectangle Grid.Row="0" Grid.Column="0" Fill="LightGray"/>
         <Rectangle Grid.Row="0" Grid.Column="1" Fill="LightGray"/>
+        <Rectangle Grid.Row="2" Grid.Column="0" Fill="LightGray"/>
+        <Rectangle Grid.Row="2" Grid.Column="1" Fill="LightGray"/>
 
         <TextBlock Grid.Row="0" Name="tbPhase2" Text="Phase 2 settings" FontWeight="Bold" FontSize="16" Margin="10,10,0,0"/>
 
@@ -61,7 +64,7 @@
 
         <Button Grid.Row="1" Name="btnAddUser" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120,175,0,0" Content="Add User" Click="btnAddUser_Click" Grid.Column="1" />
 
-        <DataGrid Name="dgUsers" Grid.Row="1" Margin="10,215,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="412" Height="150" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" CanUserResizeColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" IsReadOnly="True">
+        <DataGrid Name="dgUsers" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" Height="160" BorderBrush="Black" BorderThickness="1" CanUserResizeColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="26" Binding="{Binding userID}"/>
                 <DataGridTextColumn Header="Username" Width="*" Binding="{Binding userName}"/>
@@ -82,6 +85,6 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Button Grid.Row="1" Name="btnRemoveUser" Width="110" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,370,0,0" Content="Remove Last User" Click="btnRemoveUser_Click" Grid.Column="1" />
+        <Button Grid.Row="2" Name="btnRemoveUser" Width="110" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,175,0,0" Content="Remove Last User" Click="btnRemoveUser_Click" Grid.Column="1" />
     </Grid>
 </Page>

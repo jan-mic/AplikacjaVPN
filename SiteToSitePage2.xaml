@@ -51,8 +51,8 @@
             <ComboBoxItem Content="SHA"/>
         </ComboBox>
 
-        <TextBox Name="tBoxLifeTime" Text="86400" Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0"/>
-        <TextBlock Name="tbLifeTimeRange" Text="(120 - 2147483647 s)" Grid.Row="1" Grid.Column="1" Width="150" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="110,85,0,0"/>
+        <TextBox Name="tBoxLifeTime" Text="86400" Grid.Row="1" Grid.Column="1" Width="75" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0"/>
+        <TextBlock Name="tbLifeTimeRange" Text="(120 - 86400 s)" Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="100,85,0,0"/>
 
         <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,110,0,0">
             <ComboBoxItem Content="DH 1"/>

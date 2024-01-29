@@ -10,12 +10,17 @@
 
     <Grid>
         <Rectangle Fill="LightGray"/>
-        
-        <TextBlock Grid.Row="1" Name="tbSelectVPN" Text="Select VPN type" FontWeight="Bold" FontSize="16" Margin="20,20,0,0"/>
 
-        <CheckBox Grid.Row="1" Name="cbSiteToSite" Margin="20,64,0,0" Click="cbSiteToSite_Click"/>
-        <TextBlock Grid.Row="1" Name="tbSitetoSite" Text="Site-to-site" FontSize="16" Margin="40,60,0,0"/>
-        <CheckBox Grid.Row="1" Name="cbRemoteAccess" Margin="20,84,0,0" Click="cbRemoteAccess_Click"/>
-        <TextBlock Grid.Row="1" Name="tbRemoteAccess" Text="Remote Access" FontSize="16" Margin="40,80,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbRuleName" Text="Rule Name" FontWeight="Bold" FontSize="16" Margin="20,20,0,0"/>
+        <TextBox Name="tBoxGroupName" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="120,23,0,0"/>
+        
+
+        <TextBlock Grid.Row="1" Name="tbSelectVPN" Text="Select VPN type" FontWeight="Bold" FontSize="16" Margin="20,85,0,0"/>
+
+        <CheckBox Grid.Row="1" Name="cbSiteToSite" Margin="20,124,0,0" Click="cbSiteToSite_Click"/>
+        <TextBlock Grid.Row="1" Name="tbSitetoSite" Text="Site-to-site" FontSize="16" Margin="40,120,0,0"/>
+        <CheckBox Grid.Row="1" Name="cbRemoteAccess" Margin="20,144,0,0" Click="cbRemoteAccess_Click"/>
+        <TextBlock Grid.Row="1" Name="tbRemoteAccess" Text="Remote Access" FontSize="16" Margin="40,140,0,0"/>
+
     </Grid>
 </Page>
