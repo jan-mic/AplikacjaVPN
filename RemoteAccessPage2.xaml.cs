@@ -20,9 +20,43 @@ namespace VpnApplication
     /// </summary>
     public partial class RemoteAccessPage2 : Page
     {
+        List<User> users = new List<User>();
+
         public RemoteAccessPage2()
         {
             InitializeComponent();
+        }
+
+        public class User
+        {
+            public int userID { get; set; }
+            public string userName { get; set; }
+            public string userPassword { get; set; }
+        }
+
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            User user = new User();
+            user.userID = users.Count() + 1;
+            user.userName=tBoxUsername.Text;
+            user.userPassword=tBoxPassword.Text;
+            users.Add(user);
+
+            dgUsers.Items.Add(user);
+
+            tBoxUsername.Clear();
+            tBoxPassword.Clear();
+
+        }
+
+        private void btnRemoveUser_Click(object sender, RoutedEventArgs e)
+        {
+            if(users.Count() > 0)
+            {
+                dgUsers.Items.Remove(users.Last());
+                users.Remove(users.Last());
+
+            }
         }
     }
 }
