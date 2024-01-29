@@ -25,7 +25,7 @@ namespace VpnApplication
             InitializeComponent();
         }
 
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        /*private void btnNext_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -39,6 +39,6 @@ namespace VpnApplication
             //this.Content=mainWindow.Content;
             //Content = MainWindow
 
-        }
+        }*/
     }
 }

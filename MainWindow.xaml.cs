@@ -15,6 +15,7 @@ namespace VpnApplication
 
         StartPage startPage = new StartPage();
         RemoteAccessPage1 remoteAccessPage1 = new RemoteAccessPage1();
+        RemoteAccessPage2 remoteAccessPage2 = new RemoteAccessPage2();
         SiteToSitePage1 siteToSidePage1 = new SiteToSitePage1();
         SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
 
@@ -62,6 +63,11 @@ namespace VpnApplication
                 currentPage = "siteToSite2";
                 mainFrame.Content = siteToSitePage2;
             }
+            else if(currentPage == "remoteAccess1")
+            {
+                currentPage = "remoteAccess2";
+                mainFrame.Content = remoteAccessPage2;
+            }
             
 
         }
@@ -76,6 +82,10 @@ namespace VpnApplication
             else if(currentPage == "siteToSite2")
             {
                 currentPage = "siteToSite1";
+            }
+            else if (currentPage == "remoteAccess2")
+            {
+                currentPage = "remoteAccess1";
             }
 
 
