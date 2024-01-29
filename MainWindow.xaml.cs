@@ -14,7 +14,7 @@ namespace VpnApplication
         public string currentPage = "startPage";
 
         StartPage startPage = new StartPage();
-        RemoteAccessPage remoteAccessPage = new RemoteAccessPage();
+        RemoteAccessPage1 remoteAccessPage1 = new RemoteAccessPage1();
         SiteToSitePage1 siteToSidePage1 = new SiteToSitePage1();
         SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
 
@@ -52,8 +52,8 @@ namespace VpnApplication
                 }
                 else if (startPage.cbRemoteAccess.IsChecked == true)
                 {
-                    currentPage = "remoteAccess";
-                    mainFrame.Content = remoteAccessPage;
+                    currentPage = "remoteAccess1";
+                    mainFrame.Content = remoteAccessPage1;
                     btnBack.Visibility = Visibility.Visible;
                 }
             }
@@ -68,7 +68,7 @@ namespace VpnApplication
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            if(currentPage == "siteToSite1" || currentPage == "remoteAccess")
+            if(currentPage == "siteToSite1" || currentPage == "remoteAccess1")
             {
                 btnBack.Visibility = Visibility.Hidden;
                 currentPage = "startPage";

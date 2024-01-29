@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace VpnApplication
 {
     /// <summary>
-    /// Interaction logic for RemoteAccessPage.xaml
+    /// Interaction logic for RemoteAccessPage1.xaml
     /// </summary>
-    public partial class RemoteAccessPage : Page
+    public partial class RemoteAccessPage1 : Page
     {
-        public RemoteAccessPage()
+        public RemoteAccessPage1()
         {
             InitializeComponent();
         }

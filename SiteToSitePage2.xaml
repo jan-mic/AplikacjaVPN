@@ -82,7 +82,7 @@
         <TextBox Name="tBoxDestinationIP4" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="110,200,0,0"/>
         <TextBlock Name="tbDestinationSlash" Text="/" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="10" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,200,0,0"/>
         <TextBox Name="tBoxDestinationMask" Text="24" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="25" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="155,200,0,0"/>
-
+       
         <ComboBox Name="cbInterface" Text="select" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="116" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,225,0,0">
             <ComboBoxItem Name="cbiGigabitEthernet" Content="Fast Ethernet"/>
             <ComboBoxItem Name="cbiFastEthernet" Content="Gigabit Ethernet" IsSelected="True"/>
