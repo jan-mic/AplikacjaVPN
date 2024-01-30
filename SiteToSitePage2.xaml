@@ -33,62 +33,62 @@
 
 
 
-        <ComboBox Name="cbProtocol" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0">
-            <ComboBoxItem Content="ESP" IsSelected="True"/>
-            <ComboBoxItem Content="AH"/>
+        <ComboBox Name="cbProtocol" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0" ItemsSource="{Binding ProtocolTypes}" SelectedItem="{Binding ProtocolTypes[0]}">
         </ComboBox>
 
-        <ComboBox Name="cbEncryption" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0">
-            <ComboBoxItem Content="DES"/>
-            <ComboBoxItem Content="3DES" IsSelected="True"/>
-            <ComboBoxItem Content="AES-128"/>
-            <ComboBoxItem Content="AES-192"/>
-            <ComboBoxItem Content="AES-256"/>
+        <ComboBox Name="cbEncryptionAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0" ItemsSource="{Binding EncryptionAlgorithms}" SelectedItem="{Binding EncryptionAlgorithms[1]}">
         </ComboBox>
 
-        <ComboBox Name="cbAuthentication" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0">
-            <ComboBoxItem Content="MD5" IsSelected="True"/>
-            <ComboBoxItem Content="SHA"/>
+        <ComboBox Name="cbAuthenticationAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0" ItemsSource="{Binding AuthenticationAlgorithms}" SelectedItem="{Binding AuthenticationAlgorithms[1]}">
         </ComboBox>
 
         <TextBox Name="tBoxLifeTime" Text="86400" Grid.Row="1" Grid.Column="1" Width="75" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0"/>
         <TextBlock Name="tbLifeTimeRange" Text="(120 - 86400 s)" Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="100,85,0,0"/>
 
-        <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,110,0,0">
-            <ComboBoxItem Content="DH 1"/>
-            <ComboBoxItem Content="DH 2" IsSelected="True"/>
-            <ComboBoxItem Content="DH 5"/>
+        <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,110,0,0" ItemsSource="{Binding DiffieHellmanGroup}" SelectedItem="{Binding DiffieHellmanGroup[1]}">
         </ComboBox>
 
 
         <!-- network settings -->
         <TextBlock Grid.Row="1" Name="tbNetworkSettings" Text="Network settings" FontSize="14" FontWeight="Bold" Margin="10,150,0,0"/>
 
-        <TextBlock Grid.Row="1" Name="tbSourceNetwork" Text="Source Network (IP/Mask)" FontSize="14" Margin="10,175,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbDestinationNetwork" Text="Destination Network (IP/Mask)" FontSize="14" Margin="10,200,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbInterfaceName" Text="Inteface Name (Type/Number)" FontSize="14" Margin="10,225,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbSourceNetwork" Text="Source Network:" FontSize="14" FontWeight="SemiBold"  Margin="10,200,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbSourceNetworkIP" Text="IP Address" FontSize="14" Margin="10,225,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbSourceNetworkMask" Text="Subnet Mask" FontSize="14" Margin="10,250,0,0"/>
+        
+        
+        <TextBlock Grid.Row="1" Name="tbDestinationNetwork" Text="Destination Network:" FontSize="14" FontWeight="SemiBold" Margin="10,275,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbDestinationNetworkIP" Text="IP Address" FontSize="14" Margin="10,300,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbDestinationNetworkMask" Text="Subnet Mask" FontSize="14" Margin="10,325,0,0"/>
 
 
-        <TextBox Name="tBoxSourceIP1" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,175,0,0"/>
-        <TextBox Name="tBoxSourceIP2" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="50,175,0,0"/>
-        <TextBox Name="tBoxSourceIP3" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="80,175,0,0"/>
-        <TextBox Name="tBoxSourceIP4" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="110,175,0,0"/>
-        <TextBlock Name="tbSourceSlash" Text="/" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="10" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,175,0,0"/>
-        <TextBox Name="tBoxSourceMask" Text="24" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="25" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="155,175,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbInterfaceName" Text="Inteface Name (Type/Number)" FontSize="14" Margin="10,175,0,0"/>
 
-        <TextBox Name="tBoxDestinationIP1" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,200,0,0"/>
-        <TextBox Name="tBoxDestinationIP2" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="50,200,0,0"/>
-        <TextBox Name="tBoxDestinationIP3" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="80,200,0,0"/>
-        <TextBox Name="tBoxDestinationIP4" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="110,200,0,0"/>
-        <TextBlock Name="tbDestinationSlash" Text="/" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="10" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,200,0,0"/>
-        <TextBox Name="tBoxDestinationMask" Text="24" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="25" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="155,200,0,0"/>
-       
-        <ComboBox Name="cbInterface" Text="select" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="116" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,225,0,0">
-            <ComboBoxItem Name="cbiGigabitEthernet" Content="Fast Ethernet"/>
-            <ComboBoxItem Name="cbiFastEthernet" Content="Gigabit Ethernet" IsSelected="True"/>
-            <ComboBoxItem Name="cbiSerial" Content="Serial"/>
+        <ComboBox Name="cbInterface" Text="select" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="116" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,175,0,0" ItemsSource="{Binding InterfaceTypes}" SelectedItem="{Binding InterfaceTypes[1]}">
         </ComboBox>
-        <TextBox Name="tBoxInterface" Text="0/0/0" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="40" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,225,0,0"/>
+        <TextBox Name="tBoxInterface" Text="0/0/0" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="40" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,175,0,0"/>
+
+        <!-- source ip -->
+        <TextBox Name="tBoxSourceIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,225,0,0"/>
+        <TextBox Name="tBoxSourceIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,225,0,0"/>
+        <TextBox Name="tBoxSourceIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,225,0,0"/>
+        <TextBox Name="tBoxSourceIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,225,0,0"/>
+
+        <TextBox Name="tBoxSourceMask1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,250,0,0"/>
+        <TextBox Name="tBoxSourceMask2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,250,0,0"/>
+        <TextBox Name="tBoxSourceMask3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,250,0,0"/>
+        <TextBox Name="tBoxSourceMask4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,250,0,0"/>
+
+        <!-- destination ip -->
+        <TextBox Name="tBoxDestinationIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,300,0,0"/>
+        <TextBox Name="tBoxDestinationIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,300,0,0"/>
+        <TextBox Name="tBoxDestinationIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,300,0,0"/>
+        <TextBox Name="tBoxDestinationIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,300,0,0"/>
+
+        <TextBox Name="tBoxDestinationMask1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,325,0,0"/>
+        <TextBox Name="tBoxDestinationMask2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,325,0,0"/>
+        <TextBox Name="tBoxDestinationMask3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,325,0,0"/>
+        <TextBox Name="tBoxDestinationMask4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,325,0,0"/>
 
     </Grid>
 </Page>

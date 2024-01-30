@@ -13,11 +13,11 @@ namespace VpnApplication
         //info
         public string currentPage = "startPage";
 
-        StartPage startPage = new StartPage();
-        RemoteAccessPage1 remoteAccessPage1 = new RemoteAccessPage1();
-        RemoteAccessPage2 remoteAccessPage2 = new RemoteAccessPage2();
+        public StartPage startPage = new StartPage();
+        public RemoteAccessPage1 remoteAccessPage1 = new RemoteAccessPage1();
+        public RemoteAccessPage2 remoteAccessPage2 = new RemoteAccessPage2();
         public SiteToSitePage1 siteToSitePage1 = new SiteToSitePage1();
-        SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
+        public SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
         SiteToSitePage3 siteToSitePage3 = new SiteToSitePage3();
 
         public MainWindow()

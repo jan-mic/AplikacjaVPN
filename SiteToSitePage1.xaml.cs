@@ -23,23 +23,16 @@ namespace VpnApplication
     /// </summary>
     public partial class SiteToSitePage1 : Page
     {
-        //public List<string> encryptionAlgorithms =new List<string>();
         List<string> Commands = new();
         public string[] EncryptionAlgorithms { get; set; } = { "DES", "3DES", "AES-128", "AES-192", "AES-256" };
         public string[] AuthenticationAlgorithms { get; set; } = { "SHA", "MD5" };
         public string[] DiffieHellmanGroup { get; set; } = { "DH 1", "DH 2", "DH 5" };
-        //public List<string> asd = new List<string>();
 
         public SiteToSitePage1()
         {
             InitializeComponent();
 
             DataContext = this;
-
-            //EncryptionAlgorithms = new string[] { "DES", "3DES", "AES-128", "AES-192", "AES-256" };
-            //AuthenticationAlgorithms = new string[] { "SHA", "MD5" };
-            //asd = EncryptionAlgorithms.ToList();
-
         }
 
         public string generateEncryptionAlgorithm()
