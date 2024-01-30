@@ -42,10 +42,7 @@
         <ComboBox Name="cbAuthenticationAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0" ItemsSource="{Binding AuthenticationAlgorithms}" SelectedItem="{Binding AuthenticationAlgorithms[0]}">
         </ComboBox>
 
-        <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0">
-            <ComboBoxItem Content="DH 1"/>
-            <ComboBoxItem Name="cb1" Content="DH 2" IsSelected="True"/>
-            <ComboBoxItem Content="DH 5"/>
+        <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0" ItemsSource="{Binding DiffieHellmanGroup}" SelectedItem="{Binding DiffieHellmanGroup[1]}">
         </ComboBox>
 
         <TextBox Name="tBoxLifeTime" Text="86400" Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,110,0,0"/>
@@ -63,7 +60,7 @@
         <TextBox Name="tBoxPeerIP1" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,200,0,0"/>
         <TextBox Name="tBoxPeerIP2" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="50,200,0,0"/>
         <TextBox Name="tBoxPeerIP3" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="80,200,0,0"/>
-        <TextBox Name="tBoxPeerI4P" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="110,200,0,0"/>
+        <TextBox Name="tBoxPeerIP4" Grid.Row="1" Grid.Column="1" Width="26" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="110,200,0,0"/>
         <TextBlock Name="tbSlash" Text="/" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="10" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,200,0,0"/>
         <TextBox Name="tBoxPeerMask" Text="24" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="25" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="155,200,0,0"/>
 

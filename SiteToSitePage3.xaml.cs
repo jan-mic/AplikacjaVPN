@@ -43,7 +43,12 @@ namespace VpnApplication
             addCommand("crypto isakmp enable");
             addCommand("crypto isakmp policy " + siteToSite1.tBoxPriority.Text);
             addCommand("authentication pre-share");
-            //addCommand("encryption " + siteToSite1.generateEncryptionAlgorithm());
+            addCommand("encryption " + siteToSite1.generateEncryptionAlgorithm());
+            addCommand("group " + siteToSite1.generateDiffieHellmanGroup());
+            addCommand("hash " + siteToSite1.generateAuthenticationAlgorithm());
+            addCommand("lifetime " + siteToSite1.tBoxLifeTime.Text);
+            addCommand("exit");
+            addCommand("crypto isakmp key " + siteToSite1.tBoxPreSharedKey.Text + " address " + generateIP(siteToSite1.tBoxPeerIP1, siteToSite1.tBoxPeerIP2, siteToSite1.tBoxPeerIP3, siteToSite1.tBoxPeerIP4));
 
         }
 
@@ -51,6 +56,16 @@ namespace VpnApplication
         {
             tBoxScript.Text += text;
             tBoxScript.Text += "\n";
+        }
+
+        private string generateIP(TextBox ip1, TextBox ip2, TextBox ip3, TextBox ip4)
+        {
+            return ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
+        }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
