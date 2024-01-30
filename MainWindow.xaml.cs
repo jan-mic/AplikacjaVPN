@@ -16,8 +16,9 @@ namespace VpnApplication
         StartPage startPage = new StartPage();
         RemoteAccessPage1 remoteAccessPage1 = new RemoteAccessPage1();
         RemoteAccessPage2 remoteAccessPage2 = new RemoteAccessPage2();
-        SiteToSitePage1 siteToSidePage1 = new SiteToSitePage1();
+        public SiteToSitePage1 siteToSitePage1 = new SiteToSitePage1();
         SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
+        SiteToSitePage3 siteToSitePage3 = new SiteToSitePage3();
 
         public MainWindow()
         {
@@ -47,7 +48,7 @@ namespace VpnApplication
                 if (startPage.cbSiteToSite.IsChecked == true)
                 {
                     currentPage = "siteToSite1";
-                    mainFrame.Content = siteToSidePage1;
+                    mainFrame.Content = siteToSitePage1;
                     btnBack.Visibility = Visibility.Visible;
                     
                 }
@@ -63,13 +64,18 @@ namespace VpnApplication
                 currentPage = "siteToSite2";
                 mainFrame.Content = siteToSitePage2;
             }
+            else if (currentPage == "siteToSite2")
+            {
+                siteToSitePage3.generateScript();
+
+                currentPage = "siteToSite3";
+                mainFrame.Content = siteToSitePage3;
+            }
             else if(currentPage == "remoteAccess1")
             {
                 currentPage = "remoteAccess2";
                 mainFrame.Content = remoteAccessPage2;
             }
-            
-
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -83,10 +89,15 @@ namespace VpnApplication
             {
                 currentPage = "siteToSite1";
             }
+            else if (currentPage == "siteToSite3")
+            {
+                currentPage = "siteToSite2";
+            }
             else if (currentPage == "remoteAccess2")
             {
                 currentPage = "remoteAccess1";
             }
+
 
 
             if (mainFrame.NavigationService.CanGoBack)

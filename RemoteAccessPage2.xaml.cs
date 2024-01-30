@@ -55,7 +55,7 @@ namespace VpnApplication
             {
                 dgUsers.Items.Remove(users.Last());
                 users.Remove(users.Last());
-
+                //dgUsers.Items.RemoveAt(index);
             }
         }
     }

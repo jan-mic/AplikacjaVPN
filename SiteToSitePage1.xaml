@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VpnApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="510" d:DesignWidth="500"
+      d:DesignHeight="510" d:DesignWidth="420"
       Title="SiteToSitePage1">
 
     <Grid>
@@ -36,22 +36,15 @@
 
         <TextBox Name="tBoxPriority"  Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0"/>
 
-        <ComboBox Name="cbEncryption" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0">
-            <ComboBoxItem Content="DES"/>
-            <ComboBoxItem Content="3DES" IsSelected="True"/>
-            <ComboBoxItem Content="AES-128"/>
-            <ComboBoxItem Content="AES-192"/>
-            <ComboBoxItem Content="AES-256"/>
+        <ComboBox Name="cbEncryptionAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0" ItemsSource="{Binding EncryptionAlgorithms}" SelectedItem="{Binding EncryptionAlgorithms[1]}">
         </ComboBox>
 
-        <ComboBox Name="cbHash" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0">
-            <ComboBoxItem Content="SHA" IsSelected="True"/>
-            <ComboBoxItem Content="MD5"/>
+        <ComboBox Name="cbAuthenticationAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0" ItemsSource="{Binding AuthenticationAlgorithms}" SelectedItem="{Binding AuthenticationAlgorithms[0]}">
         </ComboBox>
 
         <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0">
             <ComboBoxItem Content="DH 1"/>
-            <ComboBoxItem Content="DH 2" IsSelected="True"/>
+            <ComboBoxItem Name="cb1" Content="DH 2" IsSelected="True"/>
             <ComboBoxItem Content="DH 5"/>
         </ComboBox>
 
