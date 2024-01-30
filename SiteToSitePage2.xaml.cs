@@ -86,5 +86,29 @@ namespace VpnApplication
 
             return Commands[cbAuthenticationAlgorithm.SelectedIndex];
         }
+
+        public string generateDiffieHellmanGroup()
+        {
+            Commands = new List<string>
+            {
+                "group1",
+                "group2",
+                "group5"
+            };
+
+            return Commands[cbDiffieHellman.SelectedIndex];
+        }
+
+        public string generateInterface()
+        {
+            Commands = new List<string>
+            {
+                "fastEthernet",
+                "gigabitEthernet",
+                "serial"
+            };
+
+            return Commands[cbInterface.SelectedIndex] + tBoxInterface.Text;
+        }
     }
 }
