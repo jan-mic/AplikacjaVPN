@@ -86,15 +86,29 @@ namespace VpnApplication
 
         private string generateReversedMask(TextBox mask1, TextBox mask2, TextBox mask3, TextBox mask4)
         {
-            int number1 = 255 - int.Parse(mask1.Text);
-            int number2 = 255 - int.Parse(mask2.Text);
-            int number3 = 255 - int.Parse(mask3.Text);
-            int number4 = 255 - int.Parse(mask4.Text);
+            int number1=0;
+            int number2=0;
+            int number3 = 0;
+            int number4 = 0;
+            if (mask1.Text.Length > 0)
+            {
+                number1 = 255 - int.Parse(mask1.Text);
+                number2 = 255 - int.Parse(mask2.Text);
+                number3 = 255 - int.Parse(mask3.Text);
+                number4 = 255 - int.Parse(mask4.Text);
+            }
+            string a=number1.ToString();
+            
 
             return number1 + "." + number2 + "." + number3 + "." + number4;
         }
 
         private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUploadConfiguration_Click(object sender, RoutedEventArgs e)
         {
 
         }
