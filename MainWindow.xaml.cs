@@ -67,6 +67,7 @@ namespace VpnApplication
             else if (currentPage == "siteToSite2")
             {
                 siteToSitePage3.generateScript();
+                siteToSitePage3.generateScript2();
 
                 currentPage = "siteToSite3";
                 mainFrame.Content = siteToSitePage3;
