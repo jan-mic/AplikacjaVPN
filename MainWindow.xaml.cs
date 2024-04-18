@@ -16,9 +16,10 @@ namespace VpnApplication
         public StartPage startPage = new StartPage();
         public RemoteAccessPage1 remoteAccessPage1 = new RemoteAccessPage1();
         public RemoteAccessPage2 remoteAccessPage2 = new RemoteAccessPage2();
+        public RemoteAccessPage3 remoteAccessPage3 = new RemoteAccessPage3();
         public SiteToSitePage1 siteToSitePage1 = new SiteToSitePage1();
         public SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
-        SiteToSitePage3 siteToSitePage3 = new SiteToSitePage3();
+        public SiteToSitePage3 siteToSitePage3 = new SiteToSitePage3();
 
         public MainWindow()
         {
@@ -77,6 +78,13 @@ namespace VpnApplication
                 currentPage = "remoteAccess2";
                 mainFrame.Content = remoteAccessPage2;
             }
+            else if (currentPage == "remoteAccess2")
+            {
+                remoteAccessPage3.generateScript();
+
+                currentPage = "remoteAccess3";
+                mainFrame.Content = remoteAccessPage3;
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -97,6 +105,10 @@ namespace VpnApplication
             else if (currentPage == "remoteAccess2")
             {
                 currentPage = "remoteAccess1";
+            }
+            else if (currentPage == "remoteAccess3")
+            {
+                currentPage = "remoteAccess2";
             }
 
 

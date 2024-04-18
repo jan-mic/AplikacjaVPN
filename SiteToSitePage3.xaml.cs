@@ -24,8 +24,8 @@ namespace VpnApplication
     public partial class SiteToSitePage3 : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        string scriptRouter1="";
-        string scriptRouter2="";
+        //string scriptRouter1="";
+        //string scriptRouter2="";
  
         public SiteToSitePage3()
         {
@@ -47,7 +47,7 @@ namespace VpnApplication
             SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
             SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
             tBoxScript.Text = "";
-            scriptRouter1 = "";
+            //scriptRouter1 = "";
 
             addCommand("enable");
             addCommand("configure terminal");
@@ -74,7 +74,7 @@ namespace VpnApplication
             addCommand("exit");
             addCommand("interface " + siteToSite2.generateInterface());
             addCommand("crypto map " + startPage.tBoxRuleName.Text);
-            //addCommand("");
+            addCommand("end");
 
 
         }
@@ -95,7 +95,7 @@ namespace VpnApplication
             SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
             SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
             tBoxScript2.Text = "";
-            scriptRouter2 = "";
+            //scriptRouter2 = "";
 
             addCommand2("enable");
             addCommand2("configure terminal");
@@ -122,7 +122,7 @@ namespace VpnApplication
             addCommand2("exit");
             addCommand2("interface " + siteToSite2.generateInterface());
             addCommand2("crypto map " + startPage.tBoxRuleName.Text);
-            //addCommand2("");
+            addCommand("end");
         }
 
         private void addCommand2(string text)

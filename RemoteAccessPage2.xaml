@@ -39,7 +39,7 @@
             <ComboBoxItem Content="AH"/>
         </ComboBox>
 
-        <ComboBox Name="cbEncryption" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0">
+        <ComboBox Name="cbEncryptionAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0">
             <ComboBoxItem Content="DES"/>
             <ComboBoxItem Content="3DES" IsSelected="True"/>
             <ComboBoxItem Content="AES-128"/>
@@ -47,7 +47,7 @@
             <ComboBoxItem Content="AES-256"/>
         </ComboBox>
 
-        <ComboBox Name="cbAuthentication" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0">
+        <ComboBox Name="cbAuthenticationAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,60,0,0">
             <ComboBoxItem Content="MD5" IsSelected="True"/>
             <ComboBoxItem Content="SHA"/>
         </ComboBox>
