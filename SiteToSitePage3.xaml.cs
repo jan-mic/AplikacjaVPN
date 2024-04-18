@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -83,8 +84,8 @@ namespace VpnApplication
             tBoxScript.Text += text;
             tBoxScript.Text += "\n";
 
-            scriptRouter1 += text;
-            scriptRouter1 += "\n";
+            //scriptRouter1 += text;
+            //scriptRouter1 += "\n";
         }
 
         public void generateScript2()
@@ -121,7 +122,7 @@ namespace VpnApplication
             addCommand2("exit");
             addCommand2("interface " + siteToSite2.generateInterface());
             addCommand2("crypto map " + startPage.tBoxRuleName.Text);
-            addCommand2("");
+            //addCommand2("");
         }
 
         private void addCommand2(string text)
@@ -129,8 +130,8 @@ namespace VpnApplication
             tBoxScript2.Text += text;
             tBoxScript2.Text += "\n";
 
-            scriptRouter2 += text;
-            scriptRouter2 += "\n";
+            //scriptRouter2 += text;
+            //scriptRouter2 += "\n";
         }
 
         private string generateIP(TextBox ip1, TextBox ip2, TextBox ip3, TextBox ip4)
@@ -175,6 +176,36 @@ namespace VpnApplication
         private void btnUploadConfiguration2_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.FileName = "ConfigurationScript1";
+            dialog.DefaultExt = ".txt";
+            dialog.Filter = "Text documents (.txt)|*.txt";
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                File.WriteAllText(dialog.FileName, tBoxScript.Text);
+            }           
+        }
+
+        private void btnSave2_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.FileName = "ConfigurationScript2";
+            dialog.DefaultExt = ".txt";
+            dialog.Filter = "Text documents (.txt)|*.txt";
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                File.WriteAllText(dialog.FileName, tBoxScript2.Text);
+            }
         }
     }
 }

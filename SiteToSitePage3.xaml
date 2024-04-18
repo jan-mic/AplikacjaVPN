@@ -22,10 +22,12 @@
         <!--ListView Name="lvScript" Grid.Row="1" Margin="10,5,10,5" /-->
         
         <TextBlock Grid.Row="1" Name="tbRouter1" Text="Router 1 configuration script:" Margin="10,2.5,0,0"/>
+        <Button Grid.Row="1" Name="btnSave" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="204,0,0,0" Content="Save" Click="btnSave_Click"/>
         <Button Grid.Row="1" Name="btnUploadConfiguration" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="269,0,0,0" Content="Upload" Click="btnUploadConfiguration_Click"/>
         <Button Grid.Row="1" Name="btnCopy" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="334,0,0,0" Content="Copy" Click="btnCopy_Click"/>
 
         <TextBlock Grid.Row="1" Name="tbRouter2" Text="Router 2 configuration script:" Margin="10,222.5,0,0"/>
+        <Button Grid.Row="1" Name="btnSave2" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="204,220,0,0" Content="Save" Click="btnSave2_Click"/>
         <Button Grid.Row="1" Name="btnUploadConfiguration2" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="269,220,0,0" Content="Upload" Click="btnUploadConfiguration2_Click"/>
         <Button Grid.Row="1" Name="btnCopy2" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="334,220,0,0" Content="Copy" Click="btnCopy2_Click"/>
 
