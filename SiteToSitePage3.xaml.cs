@@ -23,6 +23,8 @@ namespace VpnApplication
     public partial class SiteToSitePage3 : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        string scriptRouter1;
+        string scriptRouter2;
  
         public SiteToSitePage3()
         {
@@ -44,6 +46,7 @@ namespace VpnApplication
             SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
             SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
             tBoxScript.Text = "";
+            scriptRouter1 = "";
 
             addCommand("enable");
             addCommand("configure terminal");
@@ -77,6 +80,55 @@ namespace VpnApplication
         {
             tBoxScript.Text += text;
             tBoxScript.Text += "\n";
+
+            scriptRouter1 += text;
+            scriptRouter1 += "\n";
+        }
+
+        public void generateScript2()
+        {
+            mainWindow = (MainWindow)Application.Current.MainWindow;
+            StartPage startPage = mainWindow.startPage;
+            SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
+            SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
+            tBoxScript2.Text = "";
+            scriptRouter1 = "";
+
+            addCommand2("enable");
+            addCommand2("configure terminal");
+            addCommand2("crypto isakmp enable");
+            addCommand2("crypto isakmp policy " + siteToSite1.tBoxPriority.Text);
+            addCommand2("authentication pre-share");
+            addCommand2("encryption " + siteToSite1.generateEncryptionAlgorithm());
+            addCommand2("group " + siteToSite1.generateDiffieHellmanGroup());
+            addCommand2("hash " + siteToSite1.generateAuthenticationAlgorithm());
+            addCommand2("lifetime " + siteToSite1.tBoxLifeTime.Text);
+            addCommand2("exit");
+            addCommand2("crypto isakmp key " + siteToSite1.tBoxPreSharedKey.Text + " address " + generateIP(siteToSite1.tBoxPeerIP1, siteToSite1.tBoxPeerIP2, siteToSite1.tBoxPeerIP3, siteToSite1.tBoxPeerIP4));
+            addCommand2("crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + siteToSite2.generateTransformSet());
+            addCommand2("crypto ipsec security-association lifetime seconds " + siteToSite2.tBoxLifeTime.Text);
+            addCommand2("ip access-list extended " + startPage.tBoxRuleName.Text);
+            addCommand2("permit ip " + generateIP(siteToSite2.tBoxSourceIP1, siteToSite2.tBoxSourceIP2, siteToSite2.tBoxSourceIP3, siteToSite2.tBoxSourceIP4) + " " + generateReversedMask(siteToSite2.tBoxSourceMask1, siteToSite2.tBoxSourceMask2, siteToSite2.tBoxSourceMask3, siteToSite2.tBoxSourceMask4) + " " + generateIP(siteToSite2.tBoxDestinationIP1, siteToSite2.tBoxDestinationIP2, siteToSite2.tBoxDestinationIP3, siteToSite2.tBoxDestinationIP4) + " " + generateReversedMask(siteToSite2.tBoxDestinationMask1, siteToSite2.tBoxDestinationMask2, siteToSite2.tBoxDestinationMask3, siteToSite2.tBoxDestinationMask4));
+            addCommand2("permit icmp " + generateIP(siteToSite2.tBoxSourceIP1, siteToSite2.tBoxSourceIP2, siteToSite2.tBoxSourceIP3, siteToSite2.tBoxSourceIP4) + " " + generateReversedMask(siteToSite2.tBoxSourceMask1, siteToSite2.tBoxSourceMask2, siteToSite2.tBoxSourceMask3, siteToSite2.tBoxSourceMask4) + " " + generateIP(siteToSite2.tBoxDestinationIP1, siteToSite2.tBoxDestinationIP2, siteToSite2.tBoxDestinationIP3, siteToSite2.tBoxDestinationIP4) + " " + generateReversedMask(siteToSite2.tBoxDestinationMask1, siteToSite2.tBoxDestinationMask2, siteToSite2.tBoxDestinationMask3, siteToSite2.tBoxDestinationMask4));
+            addCommand2("exit");
+            addCommand2("crypto map " + startPage.tBoxRuleName.Text + " " + siteToSite1.tBoxPriority.Text + " ipsec-isakmp");
+            addCommand2("match address " + startPage.tBoxRuleName.Text);
+            addCommand2("set peer " + generateIP(siteToSite1.tBoxPeerIP1, siteToSite1.tBoxPeerIP2, siteToSite1.tBoxPeerIP3, siteToSite1.tBoxPeerIP4));
+            addCommand2("set pfs " + siteToSite2.generateDiffieHellmanGroup());
+            addCommand2("set transform-set " + startPage.tBoxRuleName.Text);
+            addCommand2("exit");
+            addCommand2("interface " + siteToSite2.generateInterface());
+            addCommand2("crypto map " + startPage.tBoxRuleName.Text);
+            addCommand2("");
+        }
+
+        private void addCommand2(string text)
+        {
+            tBoxScript.Text += text;
+            tBoxScript.Text += "\n";
+
+            scriptRouter2 += text;
+            scriptRouter2 += "\n";
         }
 
         private string generateIP(TextBox ip1, TextBox ip2, TextBox ip3, TextBox ip4)
@@ -109,6 +161,16 @@ namespace VpnApplication
         }
 
         private void btnUploadConfiguration_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCopy2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUploadConfiguration2_Click(object sender, RoutedEventArgs e)
         {
 
         }
