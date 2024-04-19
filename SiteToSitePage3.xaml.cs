@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,21 +25,14 @@ namespace VpnApplication
     public partial class SiteToSitePage3 : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        //string scriptRouter1="";
-        //string scriptRouter2="";
- 
+        public int selectedRouter;
+        bool errorOccurred = false;
+        string errorMessage = "";
+
         public SiteToSitePage3()
         {
             InitializeComponent();
-        }
-
-        public void omg()
-        {
-            SerialPort serialPort = new SerialPort("COM1", 1920, Parity.None, 8, StopBits.One);
-            serialPort.Handshake = Handshake.None;
-            //serialPort.DataReceived += new SerialDataReceivedEventHandler(spDataReceived);
-        }
-        
+        }      
 
         public void generateScript()
         {
@@ -47,7 +41,6 @@ namespace VpnApplication
             SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
             SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
             tBoxScript.Text = "";
-            //scriptRouter1 = "";
 
             addCommand("enable");
             addCommand("configure terminal");
@@ -75,17 +68,12 @@ namespace VpnApplication
             addCommand("interface " + siteToSite2.generateInterface());
             addCommand("crypto map " + startPage.tBoxRuleName.Text);
             addCommand("end");
-
-
         }
 
         private void addCommand(string text)
         {
             tBoxScript.Text += text;
             tBoxScript.Text += "\n";
-
-            //scriptRouter1 += text;
-            //scriptRouter1 += "\n";
         }
 
         public void generateScript2()
@@ -95,7 +83,6 @@ namespace VpnApplication
             SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
             SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
             tBoxScript2.Text = "";
-            //scriptRouter2 = "";
 
             addCommand2("enable");
             addCommand2("configure terminal");
@@ -122,16 +109,13 @@ namespace VpnApplication
             addCommand2("exit");
             addCommand2("interface " + siteToSite2.generateInterface());
             addCommand2("crypto map " + startPage.tBoxRuleName.Text);
-            addCommand("end");
+            addCommand2("end");
         }
 
         private void addCommand2(string text)
         {
             tBoxScript2.Text += text;
             tBoxScript2.Text += "\n";
-
-            //scriptRouter2 += text;
-            //scriptRouter2 += "\n";
         }
 
         private string generateIP(TextBox ip1, TextBox ip2, TextBox ip3, TextBox ip4)
@@ -152,9 +136,7 @@ namespace VpnApplication
                 number3 = 255 - int.Parse(mask3.Text);
                 number4 = 255 - int.Parse(mask4.Text);
             }
-            string a=number1.ToString();
-            
-
+            //string a=number1.ToString();
             return number1 + "." + number2 + "." + number3 + "." + number4;
         }
 
@@ -163,19 +145,24 @@ namespace VpnApplication
             Clipboard.SetText(tBoxScript.Text);
         }
 
-        private void btnUploadConfiguration_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnCopy2_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(tBoxScript2.Text);
         }
+        private void btnUploadConfiguration_Click(object sender, RoutedEventArgs e)
+        {
+            selectedRouter = 1;
+            SerialPortSelection serialPortSelection = new SerialPortSelection();
+            serialPortSelection.selectedVpnType = "Site to site";
+            serialPortSelection.Show();
+        }
 
         private void btnUploadConfiguration2_Click(object sender, RoutedEventArgs e)
         {
-
+            selectedRouter = 2;
+            SerialPortSelection serialPortSelection = new SerialPortSelection();
+            serialPortSelection.selectedVpnType = "Site to site";
+            serialPortSelection.Show();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -205,6 +192,216 @@ namespace VpnApplication
             if (result == true)
             {
                 File.WriteAllText(dialog.FileName, tBoxScript2.Text);
+            }
+        }
+
+        public void uploadToRouter1(string portName)
+        {
+            mainWindow = (MainWindow)Application.Current.MainWindow;
+            StartPage startPage = mainWindow.startPage;
+            SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
+            SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
+            SerialPortError serialPortError = new SerialPortError();
+            SerialPort serialPort = new SerialPort();
+            serialPort.PortName = portName;
+            serialPort.BaudRate = 9600;
+            serialPort.Parity = Parity.None;
+            serialPort.DataBits = 8;
+            serialPort.StopBits = StopBits.One;
+            serialPort.ReadTimeout = 3000;
+            serialPort.WriteTimeout = 3000;
+            serialPort.Handshake = Handshake.None;
+            serialPort.NewLine = "\n";
+            serialPort.Open();
+
+            if (serialPort.IsOpen)
+            {
+                bool isConnected = true;
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                string entryValue = "";
+                while (entryValue.Length == 0 || entryValue[entryValue.Length - 1] != '>')
+                {
+                    try
+                    {
+                        serialPort.Write("\n");
+                        Thread.Sleep(1);
+                        entryValue = serialPort.ReadExisting();
+                        Thread.Sleep(1);
+                    }
+                    catch { }
+
+                    watch.Stop();
+                    if (watch.ElapsedMilliseconds > 2000)
+                    {
+                        isConnected = false;
+                        break;
+                    }
+                    watch.Start();
+                }
+
+                if (isConnected)
+                {
+                    uploadCommand(serialPort, "enable");
+                    uploadCommand(serialPort, "configure terminal");
+                    uploadCommand(serialPort, "crypto isakmp enable");
+                    uploadCommand(serialPort, "crypto isakmp policy " + siteToSite1.tBoxPriority.Text);
+                    uploadCommand(serialPort, "authentication pre-share");
+                    uploadCommand(serialPort, "encryption " + siteToSite1.generateEncryptionAlgorithm());
+                    uploadCommand(serialPort, "group " + siteToSite1.generateDiffieHellmanGroup());
+                    uploadCommand(serialPort, "hash " + siteToSite1.generateAuthenticationAlgorithm());
+                    uploadCommand(serialPort, "lifetime " + siteToSite1.tBoxLifeTime.Text);
+                    uploadCommand(serialPort, "exit");
+                    uploadCommand(serialPort, "crypto isakmp key " + siteToSite1.tBoxPreSharedKey.Text + " address " + generateIP(siteToSite1.tBoxDestinationPeerIP1, siteToSite1.tBoxDestinationPeerIP2, siteToSite1.tBoxDestinationPeerIP3, siteToSite1.tBoxDestinationPeerIP4));
+                    uploadCommand(serialPort, "crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + siteToSite2.generateTransformSet());
+                    uploadCommand(serialPort, "crypto ipsec security-association lifetime seconds " + siteToSite2.tBoxLifeTime.Text);
+                    uploadCommand(serialPort, "ip access-list extended " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "permit ip " + generateIP(siteToSite2.tBoxSourceIP1, siteToSite2.tBoxSourceIP2, siteToSite2.tBoxSourceIP3, siteToSite2.tBoxSourceIP4) + " " + generateReversedMask(siteToSite2.tBoxSourceMask1, siteToSite2.tBoxSourceMask2, siteToSite2.tBoxSourceMask3, siteToSite2.tBoxSourceMask4) + " " + generateIP(siteToSite2.tBoxDestinationIP1, siteToSite2.tBoxDestinationIP2, siteToSite2.tBoxDestinationIP3, siteToSite2.tBoxDestinationIP4) + " " + generateReversedMask(siteToSite2.tBoxDestinationMask1, siteToSite2.tBoxDestinationMask2, siteToSite2.tBoxDestinationMask3, siteToSite2.tBoxDestinationMask4));
+                    uploadCommand(serialPort, "permit icmp " + generateIP(siteToSite2.tBoxSourceIP1, siteToSite2.tBoxSourceIP2, siteToSite2.tBoxSourceIP3, siteToSite2.tBoxSourceIP4) + " " + generateReversedMask(siteToSite2.tBoxSourceMask1, siteToSite2.tBoxSourceMask2, siteToSite2.tBoxSourceMask3, siteToSite2.tBoxSourceMask4) + " " + generateIP(siteToSite2.tBoxDestinationIP1, siteToSite2.tBoxDestinationIP2, siteToSite2.tBoxDestinationIP3, siteToSite2.tBoxDestinationIP4) + " " + generateReversedMask(siteToSite2.tBoxDestinationMask1, siteToSite2.tBoxDestinationMask2, siteToSite2.tBoxDestinationMask3, siteToSite2.tBoxDestinationMask4));
+                    uploadCommand(serialPort, "exit");
+                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " " + siteToSite1.tBoxPriority.Text + " ipsec-isakmp");
+                    uploadCommand(serialPort, "match address " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "set peer " + generateIP(siteToSite1.tBoxDestinationPeerIP1, siteToSite1.tBoxDestinationPeerIP2, siteToSite1.tBoxDestinationPeerIP3, siteToSite1.tBoxDestinationPeerIP4));
+                    uploadCommand(serialPort, "set pfs " + siteToSite2.generateDiffieHellmanGroup());
+                    uploadCommand(serialPort, "set transform-set " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "exit");
+                    uploadCommand(serialPort, "interface " + siteToSite2.generateInterface());
+                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "end");
+
+                    if (errorOccurred)
+                    {
+                        serialPortError.tbError.Text = "Error occurred during configuration:";
+                        serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
+                        serialPortError.Show();
+                    }
+                }
+                else
+                {
+                    serialPortError.tbError.Text = "Failed to establish connection with serial port.";
+                    serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
+                    serialPortError.Show();
+                }
+            }
+            serialPort.Close();
+        }
+
+        public void uploadToRouter2(string portName)
+        {
+            mainWindow = (MainWindow)Application.Current.MainWindow;
+            StartPage startPage = mainWindow.startPage;
+            SiteToSitePage1 siteToSite1 = mainWindow.siteToSitePage1;
+            SiteToSitePage2 siteToSite2 = mainWindow.siteToSitePage2;
+            SerialPortError serialPortError = new SerialPortError();
+            SerialPort serialPort = new SerialPort();
+            serialPort.PortName = portName;
+            serialPort.BaudRate = 9600;
+            serialPort.Parity = Parity.None;
+            serialPort.DataBits = 8;
+            serialPort.StopBits = StopBits.One;
+            serialPort.ReadTimeout = 3000;
+            serialPort.WriteTimeout = 3000;
+            serialPort.Handshake = Handshake.None;
+            serialPort.NewLine = "\n";
+            serialPort.Open();
+
+            if (serialPort.IsOpen)
+            {
+                bool isConnected = true;
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                string entryValue = "";
+                while (entryValue.Length == 0 || entryValue[entryValue.Length - 1] != '>')
+                {
+                    try
+                    {
+                        serialPort.Write("\n");
+                        Thread.Sleep(1);
+                        entryValue = serialPort.ReadExisting();
+                        Thread.Sleep(1);
+                    }
+                    catch { }
+
+                    watch.Stop();
+                    if (watch.ElapsedMilliseconds > 2000)
+                    {
+                        isConnected = false;
+                        break;
+                    }
+                    watch.Start();
+                }
+
+                if (isConnected)
+                {
+                    uploadCommand(serialPort, "enable");
+                    uploadCommand(serialPort, "configure terminal");
+                    uploadCommand(serialPort, "crypto isakmp enable");
+                    uploadCommand(serialPort, "crypto isakmp policy " + siteToSite1.tBoxPriority.Text);
+                    uploadCommand(serialPort, "authentication pre-share");
+                    uploadCommand(serialPort, "encryption " + siteToSite1.generateEncryptionAlgorithm());
+                    uploadCommand(serialPort, "group " + siteToSite1.generateDiffieHellmanGroup());
+                    uploadCommand(serialPort, "hash " + siteToSite1.generateAuthenticationAlgorithm());
+                    uploadCommand(serialPort, "lifetime " + siteToSite1.tBoxLifeTime.Text);
+                    uploadCommand(serialPort, "exit");
+                    uploadCommand(serialPort, "crypto isakmp key " + siteToSite1.tBoxPreSharedKey.Text + " address " + generateIP(siteToSite1.tBoxSourcePeerIP1, siteToSite1.tBoxSourcePeerIP2, siteToSite1.tBoxSourcePeerIP3, siteToSite1.tBoxSourcePeerIP4));
+                    uploadCommand(serialPort, "crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + siteToSite2.generateTransformSet());
+                    uploadCommand(serialPort, "crypto ipsec security-association lifetime seconds " + siteToSite2.tBoxLifeTime.Text);
+                    uploadCommand(serialPort, "ip access-list extended " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "permit ip " + generateIP(siteToSite2.tBoxDestinationIP1, siteToSite2.tBoxDestinationIP2, siteToSite2.tBoxDestinationIP3, siteToSite2.tBoxDestinationIP4) + " " + generateReversedMask(siteToSite2.tBoxDestinationMask1, siteToSite2.tBoxDestinationMask2, siteToSite2.tBoxDestinationMask3, siteToSite2.tBoxDestinationMask4) + " " + generateIP(siteToSite2.tBoxSourceIP1, siteToSite2.tBoxSourceIP2, siteToSite2.tBoxSourceIP3, siteToSite2.tBoxSourceIP4) + " " + generateReversedMask(siteToSite2.tBoxSourceMask1, siteToSite2.tBoxSourceMask2, siteToSite2.tBoxSourceMask3, siteToSite2.tBoxSourceMask4));
+                    uploadCommand(serialPort, "permit icmp " + generateIP(siteToSite2.tBoxDestinationIP1, siteToSite2.tBoxDestinationIP2, siteToSite2.tBoxDestinationIP3, siteToSite2.tBoxDestinationIP4) + " " + generateReversedMask(siteToSite2.tBoxDestinationMask1, siteToSite2.tBoxDestinationMask2, siteToSite2.tBoxDestinationMask3, siteToSite2.tBoxDestinationMask4) + " " + generateIP(siteToSite2.tBoxSourceIP1, siteToSite2.tBoxSourceIP2, siteToSite2.tBoxSourceIP3, siteToSite2.tBoxSourceIP4) + " " + generateReversedMask(siteToSite2.tBoxSourceMask1, siteToSite2.tBoxSourceMask2, siteToSite2.tBoxSourceMask3, siteToSite2.tBoxSourceMask4));
+                    uploadCommand(serialPort, "exit");
+                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " " + siteToSite1.tBoxPriority.Text + " ipsec-isakmp");
+                    uploadCommand(serialPort, "match address " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "set peer " + generateIP(siteToSite1.tBoxSourcePeerIP1, siteToSite1.tBoxSourcePeerIP2, siteToSite1.tBoxSourcePeerIP3, siteToSite1.tBoxSourcePeerIP4));
+                    uploadCommand(serialPort, "set pfs " + siteToSite2.generateDiffieHellmanGroup());
+                    uploadCommand(serialPort, "set transform-set " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "exit");
+                    uploadCommand(serialPort, "interface " + siteToSite2.generateInterface());
+                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
+                    uploadCommand(serialPort, "end");
+
+                    if (errorOccurred)
+                    {
+                        serialPortError.tbError.Text = "Error occurred during configuration:";
+                        serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
+                        serialPortError.Show();
+                    }
+                }
+                else
+                {
+                    serialPortError.tbError.Text = "Failed to establish connection with serial port.";
+                    serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
+                    serialPortError.Show();
+                }
+            }
+            serialPort.Close();
+        }
+
+        void uploadCommand(SerialPort serialPort, string command)
+        {
+            if (!errorOccurred)
+            {
+                try
+                {
+                    serialPort.Write(command + "\n");
+                    Thread.Sleep(1);
+                }
+                catch { }
+                checkResponse(serialPort);
+            }
+        }
+
+        void checkResponse(SerialPort serialPort)
+        {
+            string response = "";
+            try
+            {
+                response = serialPort.ReadExisting();
+                Thread.Sleep(1);
+            }
+            catch { }
+            if (response.Length > 0 && response[response.Length - 1] != '>' && response[response.Length - 1] != '#' && response[1] == ' ')
+            {
+                errorOccurred = true;
+                errorMessage = response;
             }
         }
     }

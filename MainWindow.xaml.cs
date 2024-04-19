@@ -70,8 +70,13 @@ namespace VpnApplication
                 siteToSitePage3.generateScript();
                 siteToSitePage3.generateScript2();
 
+                btnNext.Content = "Finish";
                 currentPage = "siteToSite3";
                 mainFrame.Content = siteToSitePage3;
+            }
+            else if (currentPage == "siteToSite3")
+            {
+                System.Windows.Application.Current.Shutdown();
             }
             else if(currentPage == "remoteAccess1")
             {
@@ -82,8 +87,13 @@ namespace VpnApplication
             {
                 remoteAccessPage3.generateScript();
 
+                btnNext.Content = "Finish";
                 currentPage = "remoteAccess3";
                 mainFrame.Content = remoteAccessPage3;
+            }
+            else if (currentPage == "remoteAccess3")
+            {
+                System.Windows.Application.Current.Shutdown();
             }
         }
 
@@ -100,6 +110,7 @@ namespace VpnApplication
             }
             else if (currentPage == "siteToSite3")
             {
+                btnNext.Content = "Next";
                 currentPage = "siteToSite2";
             }
             else if (currentPage == "remoteAccess2")
@@ -108,36 +119,14 @@ namespace VpnApplication
             }
             else if (currentPage == "remoteAccess3")
             {
+                btnNext.Content = "Next";
                 currentPage = "remoteAccess2";
             }
-
-
 
             if (mainFrame.NavigationService.CanGoBack)
             {
                 mainFrame.NavigationService.GoBack();
             }
-
-
-
         }
-
-        /*private void btnToggleRun_Click(object sender, RoutedEventArgs e)
-        {
-            if(running)
-            {
-                //stop
-                tbStatus.Text = "Stopped";
-                btnToggleRun.Content = "Run";
-            }
-            else
-            {
-                //run
-                tbStatus.Text = "Running";
-                btnToggleRun.Content = "Stop";
-            }
-            
-            running = !running;
-        }*/
     }
 }
