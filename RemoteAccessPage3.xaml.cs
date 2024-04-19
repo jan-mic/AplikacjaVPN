@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace VpnApplication
 {
@@ -24,11 +27,13 @@ namespace VpnApplication
     public partial class RemoteAccessPage3 : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        bool routerUpload = false;
 
         public RemoteAccessPage3()
         {
             InitializeComponent();
         }
+
 
         public void generateScript()
         {
@@ -38,6 +43,8 @@ namespace VpnApplication
             RemoteAccessPage2 remoteAccessPage2 = mainWindow.remoteAccessPage2;
             tBoxScript.Text = "";
             //scriptRouter1 = "";
+
+
 
             addCommand("enable");
             addCommand("configure terminal");
@@ -106,11 +113,120 @@ namespace VpnApplication
         private void btnUploadConfiguration_Click(object sender, RoutedEventArgs e)
         {
 
+
+            SerialPortSelection serialPortSelection = new SerialPortSelection();
+            //serialPortSelection.SerialPortNames = SerialPort.GetPortNames();
+            serialPortSelection.Show();
+
+            //uploadToRouter();
         }
 
         private void btnCopy_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(tBoxScript.Text);
         }
+
+
+        /////////////////////////////////////////////////////////////////////////////
+
+
+        public void uploadToRouter()
+        {
+            mainWindow = (MainWindow)Application.Current.MainWindow;
+            StartPage startPage = mainWindow.startPage;
+            RemoteAccessPage1 remoteAccessPage1 = mainWindow.remoteAccessPage1;
+            RemoteAccessPage2 remoteAccessPage2 = mainWindow.remoteAccessPage2;
+
+            string[] portNames = SerialPort.GetPortNames();
+            //oblsuzyc porty
+
+            SerialPort serialPort = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
+            serialPort.ReadTimeout = 500;
+            serialPort.WriteTimeout = 500;
+            serialPort.Handshake = Handshake.None;
+            serialPort.NewLine = "\n";
+
+            // readThread.Start();
+
+            serialPort.Open();
+
+            //serialPort.ReadLine()
+            //int jd= serialPort.ReadBufferSize;
+            string entryValue = "";
+            while (entryValue.Length == 0 || entryValue[entryValue.Length-1] != '>') 
+            {
+
+                serialPort.Write("\n");
+                //serialPort.WriteLine("");
+                entryValue = serialPort.ReadExisting();
+
+            }
+            //mozna wpisywac
+
+            uploadCommand(serialPort, "enable");
+            uploadCommand(serialPort, "enable");
+            uploadCommand(serialPort, "configure terminal");
+            uploadCommand(serialPort, "aaa new-model");
+            uploadCommand(serialPort, "aaa authentication login " + startPage.tBoxRuleName.Text + "local");
+            uploadCommand(serialPort, "aaa authorization network " + startPage.tBoxRuleName.Text + "local");
+
+            foreach (RemoteAccessPage2.User user in remoteAccessPage2.users)
+            {
+                uploadCommand(serialPort, "username " + user.userName + " password " + user.userPassword);
+            }
+
+            uploadCommand(serialPort, "crypto isakmp policy " + remoteAccessPage1.tBoxPriority.Text);
+            uploadCommand(serialPort, "encryption " + remoteAccessPage1.generateEncryptionAlgorithm());
+            uploadCommand(serialPort, "hash " + remoteAccessPage1.generateAuthenticationAlgorithm());
+            uploadCommand(serialPort, "group " + remoteAccessPage1.generateDiffieHellmanGroup());
+            uploadCommand(serialPort, "exit");
+            uploadCommand(serialPort, "ip local pool " + startPage.tBoxRuleName.Text + " " + generateIP(remoteAccessPage1.tBoxFirstIP1, remoteAccessPage1.tBoxFirstIP2, remoteAccessPage1.tBoxFirstIP3, remoteAccessPage1.tBoxFirstIP4) + " " + generateIP(remoteAccessPage1.tBoxLastIP1, remoteAccessPage1.tBoxLastIP2, remoteAccessPage1.tBoxLastIP3, remoteAccessPage1.tBoxLastIP4));
+            uploadCommand(serialPort, "crypto isakmp client configuration group " + remoteAccessPage1.tbGroupName.Text);
+            uploadCommand(serialPort, "key " + remoteAccessPage1.tbGroupKey.Text);
+            uploadCommand(serialPort, "pool " + startPage.tBoxRuleName.Text);
+            uploadCommand(serialPort, "exit");
+            uploadCommand(serialPort, "crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + remoteAccessPage2.generateTransformSet());
+            uploadCommand(serialPort, "crypto dynamic-map " + startPage.tBoxRuleName.Text + "-dynamic" + " " + remoteAccessPage1.tBoxPriority.Text);
+            uploadCommand(serialPort, "set transform-set " + startPage.tBoxRuleName.Text);
+            uploadCommand(serialPort, "reverse-route");
+            uploadCommand(serialPort, "exit");
+            uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " client configuration address respond");
+            uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " client authentication list " + startPage.tBoxRuleName.Text);
+            uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " isakmp authorization list " + startPage.tBoxRuleName.Text);
+            uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " " + remoteAccessPage1.tBoxPriority.Text + " ipsec-isakmp dynamic " + startPage.tBoxRuleName.Text + "-dynamic");
+            uploadCommand(serialPort, "interface " + remoteAccessPage1.generateInterface());
+            uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
+            uploadCommand(serialPort, "end");
+
+
+            //raz klikam upload
+            //po pierwszym read jest pusta linia
+            //po drugim juz router#
+
+            //po wpisaniu komedny musze zawsze sprawdzac czy po wykonaniu read jest znak zachety czy tez jakas informacja od routera, trzeba robic read line az bedzie znak zachety
+
+        }
+
+        void uploadCommand (SerialPort serialPort, string command)
+        {
+            //serialPort.WriteLine(command);
+            serialPort.Write(command + "\n");
+            Thread.Sleep(10);
+
+
+            checkResponse(serialPort);
+
+            
+        }
+
+        void checkResponse(SerialPort serialPort)
+        {
+            string response = serialPort.ReadExisting();
+            if (response[response.Length - 1] != '>' && response[response.Length - 1] != '#' && response[1] == ' ')
+            {
+                //mamy error
+            }
+        }
+
     }
 }

@@ -32,11 +32,6 @@
 
         <Frame x:Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
 
-       
-
-
-
-
 
     </Grid>
 </Window>
