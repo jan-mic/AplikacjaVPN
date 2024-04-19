@@ -24,14 +24,11 @@ namespace VpnApplication
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             btnBack.Visibility = Visibility.Hidden;
             mainFrame.Content= startPage;
-
             btnNext.IsEnabled = false;
-
-
-
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)

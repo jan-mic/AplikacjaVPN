@@ -22,6 +22,7 @@ namespace VpnApplication
         public SerialPortError()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)

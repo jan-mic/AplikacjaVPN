@@ -28,6 +28,7 @@ namespace VpnApplication
         {
             InitializeComponent();
             DataContext = this;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void btnUpload_Click(object sender, RoutedEventArgs e)
