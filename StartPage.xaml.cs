@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace VpnApplication
 {
@@ -24,6 +26,7 @@ namespace VpnApplication
     public partial class StartPage : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        ValidationCheck validationCheck = new ValidationCheck();
 
         public StartPage()
         {
@@ -60,6 +63,17 @@ namespace VpnApplication
             {
                 mainWindow.btnNext.IsEnabled = false;
             }
+        }
+
+        private void tBoxRuleName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsLetterOrDigit(e.Text);
+
+        }
+
+        private void tBoxRuleName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxRuleName);
         }
     }
 }

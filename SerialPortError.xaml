@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VpnApplication"
         mc:Ignorable="d"
-        Title="Serial port error" Height="160" Width="320"
+        Title="Serial port information" Height="160" Width="320"
         ResizeMode="NoResize">
     <Grid>
         <Rectangle Fill="LightGray"/>

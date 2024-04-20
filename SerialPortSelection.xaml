@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VpnApplication"
         mc:Ignorable="d"
-        Title="SerialPortSelection" Height="120" Width="240"
+        Title="Serial port selection" Height="120" Width="240"
         ResizeMode="NoResize">
     <Grid>
         <Rectangle Fill="LightGray"/>

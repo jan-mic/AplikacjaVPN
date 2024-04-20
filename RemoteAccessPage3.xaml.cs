@@ -47,8 +47,8 @@ namespace VpnApplication
             addCommand("enable");
             addCommand("configure terminal");
             addCommand("aaa new-model");
-            addCommand("aaa authentication login " + startPage.tBoxRuleName.Text + "local");
-            addCommand("aaa authorization network " + startPage.tBoxRuleName.Text + "local");
+            addCommand("aaa authentication login " + startPage.tBoxRuleName.Text + " local");
+            addCommand("aaa authorization network " + startPage.tBoxRuleName.Text + " local");
             foreach(RemoteAccessPage2.User user in remoteAccessPage2.users)
             {
                 addCommand("username " + user.userName + " password " + user.userPassword);
@@ -158,14 +158,13 @@ namespace VpnApplication
                     }
                     watch.Start();
                 }
-
                 if (isConnected)
                 {
                     uploadCommand(serialPort, "enable");
                     uploadCommand(serialPort, "configure terminal");
                     uploadCommand(serialPort, "aaa new-model");
-                    uploadCommand(serialPort, "aaa authentication login " + startPage.tBoxRuleName.Text + "local");
-                    uploadCommand(serialPort, "aaa authorization network " + startPage.tBoxRuleName.Text + "local");
+                    uploadCommand(serialPort, "aaa authentication login " + startPage.tBoxRuleName.Text + " local");
+                    uploadCommand(serialPort, "aaa authorization network " + startPage.tBoxRuleName.Text + " local");
                     foreach (RemoteAccessPage2.User user in remoteAccessPage2.users)
                     {
                         uploadCommand(serialPort, "username " + user.userName + " password " + user.userPassword);
@@ -197,6 +196,12 @@ namespace VpnApplication
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
+                        serialPortError.Show();
+                    }
+                    else
+                    {
+                        serialPortError.tbError.Text = "Configuration uploaded successfully!";
+                        serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
                         serialPortError.Show();
                     }
                 }

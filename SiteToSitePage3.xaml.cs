@@ -274,6 +274,12 @@ namespace VpnApplication
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
                         serialPortError.Show();
                     }
+                    else
+                    {
+                        serialPortError.tbError.Text = "Configuration uploaded successfully!";
+                        serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
+                        serialPortError.Show();
+                    }
                 }
                 else
                 {
@@ -362,6 +368,12 @@ namespace VpnApplication
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
+                        serialPortError.Show();
+                    }
+                    else
+                    {
+                        serialPortError.tbError.Text = "Configuration uploaded successfully!";
+                        serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
                         serialPortError.Show();
                     }
                 }
