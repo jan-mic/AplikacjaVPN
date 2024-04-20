@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VpnApplication
 {
@@ -27,6 +29,7 @@ namespace VpnApplication
         public string[] AuthenticationAlgorithms { get; set; } = { "SHA", "MD5" };
         public string[] DiffieHellmanGroup { get; set; } = { "DH 1", "DH 2", "DH 5" };
         public string[] InterfaceTypes { get; set; } = { "Fast Ethernet", "Gigabit Ethernet", "Serial" };
+        ValidationCheck validationCheck = new ValidationCheck();
 
         public RemoteAccessPage1()
         {
@@ -83,22 +86,137 @@ namespace VpnApplication
             return Commands[cbInterface.SelectedIndex] + tBoxInterface.Text;
         }
 
-        /*private void btnNext_Click(object sender, RoutedEventArgs e)
+        private void tBoxPriority_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            e.Handled = validationCheck.IsDigit(e.Text);
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void tBoxPriority_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //RemoteAccessPage remoteAccessPage = new RemoteAccessPage();
-            //this.Content = remoteAccessPage;
-            //MainWindow mainWindow = new MainWindow();
-            //this.Content=
-            //this.Content=mainWindow.Content;
-            //Content = MainWindow
+            validationCheck.RemoveSpaces(tBoxPriority);
+            int.TryParse(tBoxPriority.Text, out int numeric);
+            if (numeric > 10000)
+            {
+                validationCheck.RemoveLastChar(tBoxPriority);
+            }
+        }
 
-        }*/
+        private void tBoxGroupName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsLetterOrDigit(e.Text);
+        }
 
+        private void tBoxGroupName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxGroupName);
+        }
 
+        private void tBoxGroupKey_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxGroupKey);
+        }
+
+        private void tBoxFirstIP1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxFirstIP1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxFirstIP1);
+        }
+
+        private void tBoxFirstIP2_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxFirstIP2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxFirstIP2);
+        }
+
+        private void tBoxFirstIP3_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxFirstIP3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxFirstIP3);
+        }
+
+        private void tBoxFirstIP4_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxFirstIP4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxFirstIP4);
+        }
+
+        private void tBoxLastIP1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxLastIP1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxLastIP1);
+        }
+
+        private void tBoxLastIP2_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxLastIP2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxLastIP2);
+        }
+
+        private void tBoxLastIP3_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxLastIP3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxLastIP3);
+        }
+
+        private void tBoxLastIP4_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxLastIP4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxLastIP4);
+        }
+
+        private void ValidateIp(TextBox textBox)
+        {
+            validationCheck.RemoveSpaces(textBox);
+            int.TryParse(textBox.Text, out int numeric);
+            if (numeric > 255)
+            {
+                validationCheck.RemoveLastChar(textBox);
+            }
+        }
+
+        private void tBoxInterface_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[/]");
+            e.Handled = validationCheck.IsDigit(e.Text) && !regex.IsMatch(e.Text);
+        }
+
+        private void tBoxInterface_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxInterface);
+            //tBoxInterface.Text = textBox.Text.Trim();
+            //textBox.Select(textBox.Text.Length, 0);
+        }
     }
 }

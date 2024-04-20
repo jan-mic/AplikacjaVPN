@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -87,8 +88,15 @@ namespace VpnApplication
             }
             else if(currentPage == "remoteAccess1")
             {
-                currentPage = "remoteAccess2";
-                mainFrame.Content = remoteAccessPage2;
+                if(IsValidRemoteAccess1())
+                {
+                    currentPage = "remoteAccess2";
+                    mainFrame.Content = remoteAccessPage2;
+                }
+                else
+                {
+                    validationInfo.ShowDialog();
+                }
             }
             else if (currentPage == "remoteAccess2")
             {
@@ -145,7 +153,24 @@ namespace VpnApplication
         private bool IsValidSiteToSite1()
         {
             int.TryParse(siteToSitePage1.tBoxLifeTime.Text, out int numericLifeTime);
-            if (numericLifeTime < 60 || siteToSitePage1.tBoxPriority.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP1.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP2.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP3.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP4.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP1.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP2.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP3.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP4.Text.Length == 0)
+            if (numericLifeTime < 60 || siteToSitePage1.tBoxPriority.Text.Length == 0 || siteToSitePage1.tBoxPreSharedKey.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP1.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP2.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP3.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP4.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP1.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP2.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP3.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP4.Text.Length == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsValidRemoteAccess1()
+        {
+            if (remoteAccessPage1.tBoxPriority.Text.Length == 0 || remoteAccessPage1.tBoxGroupName.Text.Length == 0 || remoteAccessPage1.tBoxGroupKey.Text.Length == 0 || remoteAccessPage1.tBoxFirstIP1.Text.Length == 0 || remoteAccessPage1.tBoxFirstIP2.Text.Length == 0 || remoteAccessPage1.tBoxFirstIP3.Text.Length == 0 || remoteAccessPage1.tBoxFirstIP4.Text.Length == 0 || remoteAccessPage1.tBoxLastIP1.Text.Length == 0 || remoteAccessPage1.tBoxLastIP2.Text.Length == 0 || remoteAccessPage1.tBoxLastIP3.Text.Length == 0 || remoteAccessPage1.tBoxLastIP4.Text.Length == 0)
+            {
+                return false;
+            }
+            string[] parts = Regex.Split(remoteAccessPage1.tBoxInterface.Text, @"/");
+            int.TryParse(parts[0], out int interface1);
+            int.TryParse(parts[1], out int interface2);
+            int.TryParse(parts[2], out int interface3);
+            if (interface1 > 9 || interface2 > 24 || interface3 > 24)
             {
                 return false;
             }

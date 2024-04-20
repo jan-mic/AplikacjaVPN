@@ -18,8 +18,12 @@ namespace VpnApplication
         }
         public void RemoveSpaces(TextBox textBox)
         {
-            textBox.Text = textBox.Text.Trim();
-            textBox.Select(textBox.Text.Length, 0);
+            
+            if (textBox.Text.Any(Char.IsWhiteSpace))
+            {
+                textBox.Text= Regex.Replace(textBox.Text, @"\s", "");
+                textBox.Select(textBox.Text.Length, 0);
+            }
         }
 
         public void RemoveLastChar(TextBox textBox)
