@@ -22,6 +22,12 @@ namespace VpnApplication
             textBox.Select(textBox.Text.Length, 0);
         }
 
+        public void RemoveLastChar(TextBox textBox)
+        {
+            textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
+            textBox.Select(textBox.Text.Length, 0);
+        }
+
         public bool IsDigit(string text)
         {
             //Regex regex = new Regex("[^0-9]+");

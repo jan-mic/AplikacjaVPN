@@ -35,7 +35,7 @@ namespace VpnApplication
 
         private void cbSiteToSite_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow = (MainWindow)Application.Current.MainWindow;   
 
             cbRemoteAccess.IsChecked = false;
 
@@ -67,12 +67,14 @@ namespace VpnApplication
 
         private void tBoxRuleName_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            //ValidationCheck validationCheck = new ValidationCheck();
             e.Handled = validationCheck.IsLetterOrDigit(e.Text);
 
         }
 
         private void tBoxRuleName_TextChanged(object sender, TextChangedEventArgs e)
         {
+           // ValidationCheck validationCheck = new ValidationCheck();
             validationCheck.RemoveSpaces(tBoxRuleName);
         }
     }

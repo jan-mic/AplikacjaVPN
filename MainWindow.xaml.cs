@@ -20,6 +20,7 @@ namespace VpnApplication
         public SiteToSitePage1 siteToSitePage1 = new SiteToSitePage1();
         public SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
         public SiteToSitePage3 siteToSitePage3 = new SiteToSitePage3();
+        //ValidationCheck validationCheck = new ValidationCheck();
 
         public MainWindow()
         {
@@ -41,7 +42,9 @@ namespace VpnApplication
             //bool omg = startPage.cbSiteToSite.IsChecked.Value;
             //MessageBox.Show(startPage.cbSiteToSite.IsChecked.ToString);
 
-            if(currentPage == "startPage")
+            ValidationInfo validationInfo = new ValidationInfo();
+
+            if (currentPage == "startPage")
             {
                 if (startPage.cbSiteToSite.IsChecked == true)
                 {
@@ -59,8 +62,15 @@ namespace VpnApplication
             }
             else if (currentPage == "siteToSite1")
             {
-                currentPage = "siteToSite2";
-                mainFrame.Content = siteToSitePage2;
+                if (IsValidSiteToSite1())
+                {
+                    currentPage = "siteToSite2";
+                    mainFrame.Content = siteToSitePage2;
+                }
+                else
+                {                    
+                    validationInfo.ShowDialog();
+                }
             }
             else if (currentPage == "siteToSite2")
             {
@@ -96,12 +106,12 @@ namespace VpnApplication
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            if(currentPage == "siteToSite1" || currentPage == "remoteAccess1")
+            if (currentPage == "siteToSite1" || currentPage == "remoteAccess1")
             {
                 btnBack.Visibility = Visibility.Hidden;
                 currentPage = "startPage";
             }
-            else if(currentPage == "siteToSite2")
+            else if (currentPage == "siteToSite2")
             {
                 currentPage = "siteToSite1";
             }
@@ -124,6 +134,22 @@ namespace VpnApplication
             {
                 mainFrame.NavigationService.GoBack();
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
+
+        private bool IsValidSiteToSite1()
+        {
+            int.TryParse(siteToSitePage1.tBoxLifeTime.Text, out int numericLifeTime);
+            if (numericLifeTime < 60 || siteToSitePage1.tBoxPriority.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP1.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP2.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP3.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP4.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP1.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP2.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP3.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP4.Text.Length == 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

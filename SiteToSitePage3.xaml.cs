@@ -154,7 +154,7 @@ namespace VpnApplication
             selectedRouter = 1;
             SerialPortSelection serialPortSelection = new SerialPortSelection();
             serialPortSelection.selectedVpnType = "Site to site";
-            serialPortSelection.Show();
+            serialPortSelection.ShowDialog();
         }
 
         private void btnUploadConfiguration2_Click(object sender, RoutedEventArgs e)
@@ -162,7 +162,7 @@ namespace VpnApplication
             selectedRouter = 2;
             SerialPortSelection serialPortSelection = new SerialPortSelection();
             serialPortSelection.selectedVpnType = "Site to site";
-            serialPortSelection.Show();
+            serialPortSelection.ShowDialog();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -272,20 +272,20 @@ namespace VpnApplication
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
-                        serialPortError.Show();
+                        serialPortError.ShowDialog();
                     }
                     else
                     {
                         serialPortError.tbError.Text = "Configuration uploaded successfully!";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
-                        serialPortError.Show();
+                        serialPortError.ShowDialog();
                     }
                 }
                 else
                 {
                     serialPortError.tbError.Text = "Failed to establish connection with serial port.";
                     serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
-                    serialPortError.Show();
+                    serialPortError.ShowDialog();
                 }
             }
             serialPort.Close();
@@ -368,20 +368,20 @@ namespace VpnApplication
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
-                        serialPortError.Show();
+                        serialPortError.ShowDialog();
                     }
                     else
                     {
                         serialPortError.tbError.Text = "Configuration uploaded successfully!";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
-                        serialPortError.Show();
+                        serialPortError.ShowDialog();
                     }
                 }
                 else
                 {
                     serialPortError.tbError.Text = "Failed to establish connection with serial port.";
                     serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
-                    serialPortError.Show();
+                    serialPortError.ShowDialog();
                 }
             }
             serialPort.Close();
