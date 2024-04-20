@@ -197,5 +197,55 @@ namespace VpnApplication
                 validationCheck.RemoveLastChar(textBox);
             }
         }
+
+        private void tBoxPriority_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxLifeTime_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxSourcePeerIP1_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxSourcePeerIP2_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxSourcePeerIP3_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxSourcePeerIP4_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxDestinationPeerIP1_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxDestinationPeerIP2_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxDestinationPeerIP3_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxDestinationPeerIP4_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
     }
 }

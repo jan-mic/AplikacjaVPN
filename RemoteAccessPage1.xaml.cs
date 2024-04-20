@@ -215,8 +215,61 @@ namespace VpnApplication
         private void tBoxInterface_TextChanged(object sender, TextChangedEventArgs e)
         {
             validationCheck.RemoveSpaces(tBoxInterface);
-            //tBoxInterface.Text = textBox.Text.Trim();
-            //textBox.Select(textBox.Text.Length, 0);
+        }
+
+        private void tBoxInterface_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxPriority_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxGroupName_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxFirstIP1_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxFirstIP2_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxFirstIP3_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxFirstIP4_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxLastIP1_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxLastIP2_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxLastIP3_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxLastIP4_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
         }
     }
 }

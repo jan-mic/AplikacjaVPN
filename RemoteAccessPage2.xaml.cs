@@ -26,6 +26,7 @@ namespace VpnApplication
         public string[] ProtocolTypes { get; set; } = { "ESP", "AH" };
         public string[] EncryptionAlgorithms { get; set; } = { "DES", "3DES", "AES-128", "AES-192", "AES-256" };
         public string[] AuthenticationAlgorithms { get; set; } = { "SHA", "MD5" };
+        ValidationCheck validationCheck = new ValidationCheck();
 
         public RemoteAccessPage2()
         {
@@ -42,17 +43,24 @@ namespace VpnApplication
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            User user = new User();
-            user.userID = users.Count() + 1;
-            user.userName=tBoxUsername.Text;
-            user.userPassword=tBoxPassword.Text;
-            users.Add(user);
+            if(tBoxUsername.Text.Length > 0 && tBoxPassword.Text.Length > 0)
+            {
+                User user = new User();
+                user.userID = users.Count() + 1;
+                user.userName = tBoxUsername.Text;
+                user.userPassword = tBoxPassword.Text;
+                users.Add(user);
 
-            dgUsers.Items.Add(user);
+                dgUsers.Items.Add(user);
 
-            tBoxUsername.Clear();
-            tBoxPassword.Clear();
-
+                tBoxUsername.Clear();
+                tBoxPassword.Clear();
+            }
+            else
+            {
+                ValidationInfo validationInfo = new ValidationInfo();
+                validationInfo.ShowDialog();
+            }
         }
 
         private void btnRemoveUser_Click(object sender, RoutedEventArgs e)
@@ -114,6 +122,26 @@ namespace VpnApplication
             };
 
             return Commands[cbAuthenticationAlgorithm.SelectedIndex];
+        }
+
+        private void tBoxUsername_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsLetterOrDigit(e.Text);
+        }
+
+        private void tBoxUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxUsername);
+        }
+
+        private void tBoxPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxPassword);
+        }
+
+        private void tBoxUsername_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
         }
     }
 }

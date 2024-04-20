@@ -33,7 +33,7 @@
         <TextBlock Grid.Row="1" Name="tbDiffieHellman" Text="Key Group" FontSize="14" Margin="10,85,0,0"/>
 
 
-        <TextBox Name="tBoxPriority"  Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0" PreviewTextInput="tBoxPriority_PreviewTextInput" TextChanged="tBoxPriority_TextChanged"/>
+        <TextBox Name="tBoxPriority"  Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0" PreviewTextInput="tBoxPriority_PreviewTextInput" TextChanged="tBoxPriority_TextChanged" DataObject.Pasting="tBoxPriority_Pasting"/>
         <TextBlock Name="tbPriorityInfo" Text="(1 - 10 000)" Grid.Row="1" Grid.Column="1" Width="74" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="106,10,0,0"/>
 
         <ComboBox Name="cbEncryptionAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0">
@@ -62,7 +62,7 @@
         <TextBlock Grid.Row="1" Name="tbGroupName" Text="Group Name" FontSize="14" Margin="10,150,0,0"/>
         <TextBlock Grid.Row="1" Name="tbGroupKey" Text="Group Key" FontSize="14" Margin="10,175,0,0"/>
 
-        <TextBox Name="tBoxGroupName" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,150,0,0" PreviewTextInput="tBoxGroupName_PreviewTextInput" TextChanged="tBoxGroupName_TextChanged"/>
+        <TextBox Name="tBoxGroupName" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,150,0,0" PreviewTextInput="tBoxGroupName_PreviewTextInput" TextChanged="tBoxGroupName_TextChanged" DataObject.Pasting="tBoxGroupName_Pasting"/>
         <TextBox Name="tBoxGroupKey" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,175,0,0" TextChanged="tBoxGroupKey_TextChanged"/>
 
         <!-- client address pool -->
@@ -71,15 +71,15 @@
         <TextBlock Grid.Row="1" Name="tbFirstAddress" Text="First IP Address" FontSize="14" Margin="10,250,0,0"/>
         <TextBlock Grid.Row="1" Name="tbLastAddress" Text="Last IP Address" FontSize="14" Margin="10,275,0,0"/>
 
-        <TextBox Name="tBoxFirstIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,250,0,0" PreviewTextInput="tBoxFirstIP1_PreviewTextInput" TextChanged="tBoxFirstIP1_TextChanged"/>
-        <TextBox Name="tBoxFirstIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,250,0,0" PreviewTextInput="tBoxFirstIP2_PreviewTextInput" TextChanged="tBoxFirstIP2_TextChanged"/>
-        <TextBox Name="tBoxFirstIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,250,0,0" PreviewTextInput="tBoxFirstIP3_PreviewTextInput" TextChanged="tBoxFirstIP3_TextChanged"/>
-        <TextBox Name="tBoxFirstIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,250,0,0" PreviewTextInput="tBoxFirstIP4_PreviewTextInput" TextChanged="tBoxFirstIP4_TextChanged"/>
+        <TextBox Name="tBoxFirstIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,250,0,0" PreviewTextInput="tBoxFirstIP1_PreviewTextInput" TextChanged="tBoxFirstIP1_TextChanged" DataObject.Pasting="tBoxFirstIP1_Pasting"/>
+        <TextBox Name="tBoxFirstIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,250,0,0" PreviewTextInput="tBoxFirstIP2_PreviewTextInput" TextChanged="tBoxFirstIP2_TextChanged" DataObject.Pasting="tBoxFirstIP2_Pasting"/>
+        <TextBox Name="tBoxFirstIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,250,0,0" PreviewTextInput="tBoxFirstIP3_PreviewTextInput" TextChanged="tBoxFirstIP3_TextChanged" DataObject.Pasting="tBoxFirstIP3_Pasting"/>
+        <TextBox Name="tBoxFirstIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,250,0,0" PreviewTextInput="tBoxFirstIP4_PreviewTextInput" TextChanged="tBoxFirstIP4_TextChanged" DataObject.Pasting="tBoxFirstIP4_Pasting"/>
 
-        <TextBox Name="tBoxLastIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,275,0,0" PreviewTextInput="tBoxLastIP1_PreviewTextInput" TextChanged="tBoxLastIP1_TextChanged"/>
-        <TextBox Name="tBoxLastIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,275,0,0" PreviewTextInput="tBoxLastIP2_PreviewTextInput" TextChanged="tBoxLastIP2_TextChanged"/>
-        <TextBox Name="tBoxLastIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,275,0,0" PreviewTextInput="tBoxLastIP3_PreviewTextInput" TextChanged="tBoxLastIP3_TextChanged"/>
-        <TextBox Name="tBoxLastIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,275,0,0" PreviewTextInput="tBoxLastIP4_PreviewTextInput" TextChanged="tBoxLastIP4_TextChanged"/>
+        <TextBox Name="tBoxLastIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,275,0,0" PreviewTextInput="tBoxLastIP1_PreviewTextInput" TextChanged="tBoxLastIP1_TextChanged" DataObject.Pasting="tBoxLastIP1_Pasting"/>
+        <TextBox Name="tBoxLastIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,275,0,0" PreviewTextInput="tBoxLastIP2_PreviewTextInput" TextChanged="tBoxLastIP2_TextChanged" DataObject.Pasting="tBoxLastIP2_Pasting"/>
+        <TextBox Name="tBoxLastIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,275,0,0" PreviewTextInput="tBoxLastIP3_PreviewTextInput" TextChanged="tBoxLastIP3_TextChanged" DataObject.Pasting="tBoxLastIP3_Pasting"/>
+        <TextBox Name="tBoxLastIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,275,0,0" PreviewTextInput="tBoxLastIP4_PreviewTextInput" TextChanged="tBoxLastIP4_TextChanged" DataObject.Pasting="tBoxLastIP4_Pasting"/>
 
         <!-- network settings-->
         <TextBlock Grid.Row="1" Name="tbNetworkSettings" Text="Network settings" FontSize="14" FontWeight="Bold" Margin="10,315,0,0"/>
@@ -88,7 +88,7 @@
 
         <ComboBox Name="cbInterface" Text="select" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="116" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,340,0,0" ItemsSource="{Binding InterfaceTypes}" SelectedItem="{Binding InterfaceTypes[1]}">
         </ComboBox>
-        <TextBox Name="tBoxInterface" Text="0/0/0" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="40" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,340,0,0" PreviewTextInput="tBoxInterface_PreviewTextInput" TextChanged="tBoxInterface_TextChanged"/>
+        <TextBox Name="tBoxInterface" Text="0/0/0" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="40" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,340,0,0" PreviewTextInput="tBoxInterface_PreviewTextInput" TextChanged="tBoxInterface_TextChanged" DataObject.Pasting="tBoxInterface_Pasting"/>
         <Image Margin="182,270,5,0" Grid.Row="1" Grid.Column="1" ToolTip="Interface format: [0-9] / [0-24] / [0-24]" ToolTipService.InitialShowDelay="0" ToolTipService.Placement="Top">
             <Image.Source>
                 <BitmapImage UriSource="/images/question_mark.png"/>

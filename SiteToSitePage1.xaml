@@ -34,7 +34,7 @@
         <TextBlock Grid.Row="1" Name="tbLifeTime" Text="SA Life Time" FontSize="14" Margin="10,110,0,0"/>
 
 
-        <TextBox Name="tBoxPriority"  Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0" TextChanged="tBoxPriority_TextChanged" PreviewTextInput="tBoxPriority_PreviewTextInput"/>
+        <TextBox Name="tBoxPriority"  Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,10,0,0" TextChanged="tBoxPriority_TextChanged" PreviewTextInput="tBoxPriority_PreviewTextInput" DataObject.Pasting="tBoxPriority_Pasting"/>
         <TextBlock Name="tbPriorityInfo" Text="(1 - 10 000)" Grid.Row="1" Grid.Column="1" Width="74" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="106,10,0,0"/>
 
         <ComboBox Name="cbEncryptionAlgorithm" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,35,0,0" ItemsSource="{Binding EncryptionAlgorithms}" SelectedItem="{Binding EncryptionAlgorithms[1]}">
@@ -46,7 +46,7 @@
         <ComboBox Name="cbDiffieHellman" Text="select" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,85,0,0" ItemsSource="{Binding DiffieHellmanGroup}" SelectedItem="{Binding DiffieHellmanGroup[1]}">
         </ComboBox>
 
-        <TextBox Name="tBoxLifeTime" Text="86400" Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,110,0,0" PreviewTextInput="tBoxLifeTime_PreviewTextInput" TextChanged="tBoxLifeTime_TextChanged"/>
+        <TextBox Name="tBoxLifeTime" Text="86400" Grid.Row="1" Grid.Column="1" Width="80" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,110,0,0" PreviewTextInput="tBoxLifeTime_PreviewTextInput" TextChanged="tBoxLifeTime_TextChanged" DataObject.Pasting="tBoxLifeTime_Pasting"/>
         <TextBlock Name="tbLifeTimeRange" Text="(60 - 86400 s)" Grid.Row="1" Grid.Column="1" Width="74" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="106,110,0,0"/>
 
 
@@ -57,16 +57,16 @@
         <TextBox Name="tBoxPreSharedKey" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,175,0,0" TextChanged="tBoxPreSharedKey_TextChanged"/>
 
         <TextBlock Grid.Row="1" Name="tbSourcePeerIP" Text="Source IP Address" FontSize="14" Margin="10,200,0,0"/>
-        <TextBox Name="tBoxSourcePeerIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,200,0,0" PreviewTextInput="tBoxSourcePeerIP1_PreviewTextInput" TextChanged="tBoxSourcePeerIP1_TextChanged"/>
-        <TextBox Name="tBoxSourcePeerIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,200,0,0" PreviewTextInput="tBoxSourcePeerIP2_PreviewTextInput" TextChanged="tBoxSourcePeerIP2_TextChanged"/>
-        <TextBox Name="tBoxSourcePeerIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,200,0,0" PreviewTextInput="tBoxSourcePeerIP3_PreviewTextInput" TextChanged="tBoxSourcePeerIP3_TextChanged"/>
-        <TextBox Name="tBoxSourcePeerIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,200,0,0" PreviewTextInput="tBoxSourcePeerIP4_PreviewTextInput" TextChanged="tBoxSourcePeerIP4_TextChanged"/>
+        <TextBox Name="tBoxSourcePeerIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,200,0,0" PreviewTextInput="tBoxSourcePeerIP1_PreviewTextInput" TextChanged="tBoxSourcePeerIP1_TextChanged" DataObject.Pasting="tBoxSourcePeerIP1_Pasting"/>
+        <TextBox Name="tBoxSourcePeerIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,200,0,0" PreviewTextInput="tBoxSourcePeerIP2_PreviewTextInput" TextChanged="tBoxSourcePeerIP2_TextChanged" DataObject.Pasting="tBoxSourcePeerIP2_Pasting"/>
+        <TextBox Name="tBoxSourcePeerIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,200,0,0" PreviewTextInput="tBoxSourcePeerIP3_PreviewTextInput" TextChanged="tBoxSourcePeerIP3_TextChanged" DataObject.Pasting="tBoxSourcePeerIP3_Pasting"/>
+        <TextBox Name="tBoxSourcePeerIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,200,0,0" PreviewTextInput="tBoxSourcePeerIP4_PreviewTextInput" TextChanged="tBoxSourcePeerIP4_TextChanged" DataObject.Pasting="tBoxSourcePeerIP4_Pasting"/>
 
         <TextBlock Grid.Row="1" Name="tbDestinationPeerIP" Text="Destination IP Address" FontSize="14" Margin="10,225,0,0"/>
-        <TextBox Name="tBoxDestinationPeerIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,225,0,0" PreviewTextInput="tBoxDestinationPeerIP1_PreviewTextInput" TextChanged="tBoxDestinationPeerIP1_TextChanged"/>
-        <TextBox Name="tBoxDestinationPeerIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,225,0,0" PreviewTextInput="tBoxDestinationPeerIP2_PreviewTextInput" TextChanged="tBoxDestinationPeerIP2_TextChanged"/>
-        <TextBox Name="tBoxDestinationPeerIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,225,0,0" PreviewTextInput="tBoxDestinationPeerIP3_PreviewTextInput" TextChanged="tBoxDestinationPeerIP3_TextChanged"/>
-        <TextBox Name="tBoxDestinationPeerIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,225,0,0" PreviewTextInput="tBoxDestinationPeerIP4_PreviewTextInput" TextChanged="tBoxDestinationPeerIP4_TextChanged"/>
+        <TextBox Name="tBoxDestinationPeerIP1" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="20,225,0,0" PreviewTextInput="tBoxDestinationPeerIP1_PreviewTextInput" TextChanged="tBoxDestinationPeerIP1_TextChanged" DataObject.Pasting="tBoxDestinationPeerIP1_Pasting"/>
+        <TextBox Name="tBoxDestinationPeerIP2" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="61,225,0,0" PreviewTextInput="tBoxDestinationPeerIP2_PreviewTextInput" TextChanged="tBoxDestinationPeerIP2_TextChanged" DataObject.Pasting="tBoxDestinationPeerIP2_Pasting"/>
+        <TextBox Name="tBoxDestinationPeerIP3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,225,0,0" PreviewTextInput="tBoxDestinationPeerIP3_PreviewTextInput" TextChanged="tBoxDestinationPeerIP3_TextChanged" DataObject.Pasting="tBoxDestinationPeerIP3_Pasting"/>
+        <TextBox Name="tBoxDestinationPeerIP4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,225,0,0" PreviewTextInput="tBoxDestinationPeerIP4_PreviewTextInput" TextChanged="tBoxDestinationPeerIP4_TextChanged" DataObject.Pasting="tBoxDestinationPeerIP4_Pasting"/>
         
     </Grid>
 </Page>
