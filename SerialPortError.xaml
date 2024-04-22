@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VpnApplication"
         mc:Ignorable="d"
-        Title="Serial port information" Height="160" Width="320"
+        Title="Serial port information" Height="160" Width="350"
         ResizeMode="NoResize">
     <Grid>
         <Rectangle Fill="LightGray"/>
 
-        <TextBlock Name="tbError" Text="" FontSize="14" Margin="10,10,0,0" Width="300" Height="20" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Name="tbError" Text="" FontSize="14" Margin="10,10,0,0" Width="340" Height="20" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         <TextBox Name="tBoxError"  Margin="10,35,10,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="290" Height="50" FontSize="13" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  IsReadOnly="True" Visibility="Hidden"/>
 

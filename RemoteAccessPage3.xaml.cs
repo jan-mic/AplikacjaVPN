@@ -105,9 +105,20 @@ namespace VpnApplication
 
         private void btnUploadConfiguration_Click(object sender, RoutedEventArgs e)
         {
-            SerialPortSelection serialPortSelection = new SerialPortSelection();
-            serialPortSelection.selectedVpnType = "Remote Access";
-            serialPortSelection.ShowDialog();
+            string[] SerialPortNames = SerialPort.GetPortNames().Where(p => p.StartsWith("COM")).ToArray();
+            if(SerialPortNames.Length == 0)
+            {
+                SerialPortError serialPortError = new SerialPortError();
+                serialPortError.tbError.Text = "No serial ports available.";
+                serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
+                serialPortError.ShowDialog();
+            }
+            else
+            {
+                SerialPortSelection serialPortSelection = new SerialPortSelection();
+                serialPortSelection.selectedVpnType = "Remote Access";
+                serialPortSelection.ShowDialog();
+            }
         }
 
         private void btnCopy_Click(object sender, RoutedEventArgs e)
@@ -132,89 +143,100 @@ namespace VpnApplication
             serialPort.WriteTimeout = 3000;
             serialPort.Handshake = Handshake.None;
             serialPort.NewLine = "\n";
-            serialPort.Open();
 
-            if(serialPort.IsOpen)
+            try
             {
-                bool isConnected = true;
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-                string entryValue = "";
-                while (entryValue.Length == 0 || entryValue[entryValue.Length - 1] != '>')
+                serialPort.Open();
+
+                if (serialPort.IsOpen)
                 {
-                    try
+                    bool isConnected = true;
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    string entryValue = "";
+                    while (entryValue.Length == 0 || entryValue[entryValue.Length - 1] != '>')
                     {
-                        serialPort.Write("\n");
-                        Thread.Sleep(1);
-                        entryValue = serialPort.ReadExisting();
-                        Thread.Sleep(1);
-                    }
-                    catch { }
+                        try
+                        {
+                            serialPort.Write("\n");
+                            Thread.Sleep(1);
+                            entryValue = serialPort.ReadExisting();
+                            Thread.Sleep(1);
+                        }
+                        catch { }
 
-                    watch.Stop();
-                    if (watch.ElapsedMilliseconds > 1000)
-                    {
-                        isConnected = false;
-                        break;
+                        watch.Stop();
+                        if (watch.ElapsedMilliseconds > 1000)
+                        {
+                            isConnected = false;
+                            break;
+                        }
+                        watch.Start();
                     }
-                    watch.Start();
-                }
 
-                if (isConnected)
-                {
-                    uploadCommand(serialPort, "enable");
-                    uploadCommand(serialPort, "configure terminal");
-                    uploadCommand(serialPort, "aaa new-model");
-                    uploadCommand(serialPort, "aaa authentication login " + startPage.tBoxRuleName.Text + " local");
-                    uploadCommand(serialPort, "aaa authorization network " + startPage.tBoxRuleName.Text + " local");
-                    foreach (RemoteAccessPage2.User user in remoteAccessPage2.users)
+                    if (isConnected)
                     {
-                        uploadCommand(serialPort, "username " + user.userName + " password " + user.userPassword);
-                    }
-                    uploadCommand(serialPort, "crypto isakmp policy " + remoteAccessPage1.tBoxPriority.Text);
-                    uploadCommand(serialPort, "encryption " + remoteAccessPage1.generateEncryptionAlgorithm());
-                    uploadCommand(serialPort, "hash " + remoteAccessPage1.generateAuthenticationAlgorithm());
-                    uploadCommand(serialPort, "group " + remoteAccessPage1.generateDiffieHellmanGroup());
-                    uploadCommand(serialPort, "exit");
-                    uploadCommand(serialPort, "ip local pool " + startPage.tBoxRuleName.Text + " " + generateIP(remoteAccessPage1.tBoxFirstIP1, remoteAccessPage1.tBoxFirstIP2, remoteAccessPage1.tBoxFirstIP3, remoteAccessPage1.tBoxFirstIP4) + " " + generateIP(remoteAccessPage1.tBoxLastIP1, remoteAccessPage1.tBoxLastIP2, remoteAccessPage1.tBoxLastIP3, remoteAccessPage1.tBoxLastIP4));
-                    uploadCommand(serialPort, "crypto isakmp client configuration group " + remoteAccessPage1.tBoxGroupName.Text);
-                    uploadCommand(serialPort, "key " + remoteAccessPage1.tBoxGroupKey.Text);
-                    uploadCommand(serialPort, "pool " + startPage.tBoxRuleName.Text);
-                    uploadCommand(serialPort, "exit");
-                    uploadCommand(serialPort, "crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + remoteAccessPage2.generateTransformSet());
-                    uploadCommand(serialPort, "crypto dynamic-map " + startPage.tBoxRuleName.Text + "-dynamic" + " " + remoteAccessPage1.tBoxPriority.Text);
-                    uploadCommand(serialPort, "set transform-set " + startPage.tBoxRuleName.Text);
-                    uploadCommand(serialPort, "reverse-route");
-                    uploadCommand(serialPort, "exit");
-                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " client configuration address respond");
-                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " client authentication list " + startPage.tBoxRuleName.Text);
-                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " isakmp authorization list " + startPage.tBoxRuleName.Text);
-                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " " + remoteAccessPage1.tBoxPriority.Text + " ipsec-isakmp dynamic " + startPage.tBoxRuleName.Text + "-dynamic");
-                    uploadCommand(serialPort, "interface " + remoteAccessPage1.generateInterface());
-                    uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
-                    uploadCommand(serialPort, "end");
+                        uploadCommand(serialPort, "enable");
+                        uploadCommand(serialPort, "configure terminal");
+                        uploadCommand(serialPort, "aaa new-model");
+                        uploadCommand(serialPort, "aaa authentication login " + startPage.tBoxRuleName.Text + " local");
+                        uploadCommand(serialPort, "aaa authorization network " + startPage.tBoxRuleName.Text + " local");
+                        foreach (RemoteAccessPage2.User user in remoteAccessPage2.users)
+                        {
+                            uploadCommand(serialPort, "username " + user.userName + " password " + user.userPassword);
+                        }
+                        uploadCommand(serialPort, "crypto isakmp policy " + remoteAccessPage1.tBoxPriority.Text);
+                        uploadCommand(serialPort, "encryption " + remoteAccessPage1.generateEncryptionAlgorithm());
+                        uploadCommand(serialPort, "hash " + remoteAccessPage1.generateAuthenticationAlgorithm());
+                        uploadCommand(serialPort, "group " + remoteAccessPage1.generateDiffieHellmanGroup());
+                        uploadCommand(serialPort, "exit");
+                        uploadCommand(serialPort, "ip local pool " + startPage.tBoxRuleName.Text + " " + generateIP(remoteAccessPage1.tBoxFirstIP1, remoteAccessPage1.tBoxFirstIP2, remoteAccessPage1.tBoxFirstIP3, remoteAccessPage1.tBoxFirstIP4) + " " + generateIP(remoteAccessPage1.tBoxLastIP1, remoteAccessPage1.tBoxLastIP2, remoteAccessPage1.tBoxLastIP3, remoteAccessPage1.tBoxLastIP4));
+                        uploadCommand(serialPort, "crypto isakmp client configuration group " + remoteAccessPage1.tBoxGroupName.Text);
+                        uploadCommand(serialPort, "key " + remoteAccessPage1.tBoxGroupKey.Text);
+                        uploadCommand(serialPort, "pool " + startPage.tBoxRuleName.Text);
+                        uploadCommand(serialPort, "exit");
+                        uploadCommand(serialPort, "crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + remoteAccessPage2.generateTransformSet());
+                        uploadCommand(serialPort, "crypto dynamic-map " + startPage.tBoxRuleName.Text + "-dynamic" + " " + remoteAccessPage1.tBoxPriority.Text);
+                        uploadCommand(serialPort, "set transform-set " + startPage.tBoxRuleName.Text);
+                        uploadCommand(serialPort, "reverse-route");
+                        uploadCommand(serialPort, "exit");
+                        uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " client configuration address respond");
+                        uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " client authentication list " + startPage.tBoxRuleName.Text);
+                        uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " isakmp authorization list " + startPage.tBoxRuleName.Text);
+                        uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text + " " + remoteAccessPage1.tBoxPriority.Text + " ipsec-isakmp dynamic " + startPage.tBoxRuleName.Text + "-dynamic");
+                        uploadCommand(serialPort, "interface " + remoteAccessPage1.generateInterface());
+                        uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
+                        uploadCommand(serialPort, "end");
 
-                    if(errorOccurred)
-                    {
-                        serialPortError.tbError.Text = "Error occurred during configuration:";
-                        serialPortError.tBoxError.Text = errorMessage;
-                        serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
-                        serialPortError.ShowDialog();
+                        if (errorOccurred)
+                        {
+                            serialPortError.tbError.Text = "Error occurred during configuration:";
+                            serialPortError.tBoxError.Text = errorMessage;
+                            serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
+                            serialPortError.ShowDialog();
+                        }
+                        else
+                        {
+                            serialPortError.tbError.Text = "Configuration uploaded successfully!";
+                            serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
+                            serialPortError.ShowDialog();
+                        }
                     }
                     else
                     {
-                        serialPortError.tbError.Text = "Configuration uploaded successfully!";
+                        serialPortError.tbError.Text = "Failed to establish connection with network device.";
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
                         serialPortError.ShowDialog();
                     }
                 }
-                else
-                {
-                    serialPortError.tbError.Text = "Failed to establish connection with serial port.";
-                    serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
-                    serialPortError.ShowDialog();
-                }
-            }           
-            serialPort.Close();
+                serialPort.Close();
+            }
+            catch
+            {
+                serialPortError.tbError.Text = "Failed to open selected serial port.";
+                serialPortError.tBoxError.Visibility = System.Windows.Visibility.Hidden;
+                serialPortError.ShowDialog();
+            }
+            
         }
 
         void uploadCommand (SerialPort serialPort, string command)
