@@ -271,6 +271,7 @@ namespace VpnApplication
                     if (errorOccurred)
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
+                        serialPortError.tBoxError.Text = errorMessage;
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
                         serialPortError.ShowDialog();
                     }
@@ -367,6 +368,7 @@ namespace VpnApplication
                     if (errorOccurred)
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
+                        serialPortError.tBoxError.Text = errorMessage;
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
                         serialPortError.ShowDialog();
                     }

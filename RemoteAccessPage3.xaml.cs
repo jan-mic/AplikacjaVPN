@@ -59,8 +59,8 @@ namespace VpnApplication
             addCommand("group " + remoteAccessPage1.generateDiffieHellmanGroup());
             addCommand("exit");
             addCommand("ip local pool " + startPage.tBoxRuleName.Text + " " + generateIP(remoteAccessPage1.tBoxFirstIP1, remoteAccessPage1.tBoxFirstIP2, remoteAccessPage1.tBoxFirstIP3, remoteAccessPage1.tBoxFirstIP4) + " " + generateIP(remoteAccessPage1.tBoxLastIP1, remoteAccessPage1.tBoxLastIP2, remoteAccessPage1.tBoxLastIP3, remoteAccessPage1.tBoxLastIP4));
-            addCommand("crypto isakmp client configuration group " + remoteAccessPage1.tbGroupName.Text);
-            addCommand("key " + remoteAccessPage1.tbGroupKey.Text);
+            addCommand("crypto isakmp client configuration group " + remoteAccessPage1.tBoxGroupName.Text);
+            addCommand("key " + remoteAccessPage1.tBoxGroupKey.Text);
             addCommand("pool " + startPage.tBoxRuleName.Text);
             addCommand("exit");
             addCommand("crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + remoteAccessPage2.generateTransformSet());
@@ -175,8 +175,8 @@ namespace VpnApplication
                     uploadCommand(serialPort, "group " + remoteAccessPage1.generateDiffieHellmanGroup());
                     uploadCommand(serialPort, "exit");
                     uploadCommand(serialPort, "ip local pool " + startPage.tBoxRuleName.Text + " " + generateIP(remoteAccessPage1.tBoxFirstIP1, remoteAccessPage1.tBoxFirstIP2, remoteAccessPage1.tBoxFirstIP3, remoteAccessPage1.tBoxFirstIP4) + " " + generateIP(remoteAccessPage1.tBoxLastIP1, remoteAccessPage1.tBoxLastIP2, remoteAccessPage1.tBoxLastIP3, remoteAccessPage1.tBoxLastIP4));
-                    uploadCommand(serialPort, "crypto isakmp client configuration group " + remoteAccessPage1.tbGroupName.Text);
-                    uploadCommand(serialPort, "key " + remoteAccessPage1.tbGroupKey.Text);
+                    uploadCommand(serialPort, "crypto isakmp client configuration group " + remoteAccessPage1.tBoxGroupName.Text);
+                    uploadCommand(serialPort, "key " + remoteAccessPage1.tBoxGroupKey.Text);
                     uploadCommand(serialPort, "pool " + startPage.tBoxRuleName.Text);
                     uploadCommand(serialPort, "exit");
                     uploadCommand(serialPort, "crypto ipsec transform-set " + startPage.tBoxRuleName.Text + " " + remoteAccessPage2.generateTransformSet());
@@ -195,6 +195,7 @@ namespace VpnApplication
                     if(errorOccurred)
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";
+                        serialPortError.tBoxError.Text = errorMessage;
                         serialPortError.tBoxError.Visibility = System.Windows.Visibility.Visible;
                         serialPortError.ShowDialog();
                     }

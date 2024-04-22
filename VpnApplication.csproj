@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\network_image.png" />
     <None Remove="images\question_mark.png" />
   </ItemGroup>
 
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="images\network_image.png" />
     <Resource Include="images\question_mark.png" />
   </ItemGroup>
 

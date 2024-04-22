@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -188,21 +189,12 @@ namespace VpnApplication
             {
                 return false;
             }
-            string[] parts = Regex.Split(remoteAccessPage1.tBoxInterface.Text, @"/");
-            if(parts.Length == 3) 
-            {
-                int.TryParse(parts[0], out int interface1);
-                int.TryParse(parts[1], out int interface2);
-                int.TryParse(parts[2], out int interface3);
-                if (interface1 > 9 || interface2 > 24 || interface3 > 24)
-                {
-                    return false;
-                }
-            }
-            else
+
+            if (!IsValidInterfaceFormat(remoteAccessPage1.tBoxInterface))
             {
                 return false;
             }
+
             return true;
         }
 
@@ -213,7 +205,36 @@ namespace VpnApplication
             {
                 return false;
             }
-            string[] parts = Regex.Split(siteToSitePage2.tBoxInterface.Text, @"/");
+
+            if (!IsValidInterfaceFormat(siteToSitePage2.tBoxInterface))
+            {
+                return false;
+            }
+            
+            return true;
+        }
+
+        private bool IsValidRemoteAccess2()
+        {
+            if(remoteAccessPage2.users.Count == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsValidInterfaceFormat(TextBox textBox)
+        {
+            string[] parts = Regex.Split(textBox.Text, @"/");
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (parts[i] == "")
+                {
+                    return false;
+                }
+            }
+
             if (parts.Length == 3)
             {
                 int.TryParse(parts[0], out int interface1);
@@ -225,15 +246,6 @@ namespace VpnApplication
                 }
             }
             else
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private bool IsValidRemoteAccess2()
-        {
-            if(remoteAccessPage2.users.Count == 0)
             {
                 return false;
             }
