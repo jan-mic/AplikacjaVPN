@@ -91,7 +91,7 @@
         <TextBox Name="tBoxDestinationMask3" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="102,325,0,0" PreviewTextInput="tBoxDestinationMask3_PreviewTextInput" TextChanged="tBoxDestinationMask3_TextChanged" DataObject.Pasting="tBoxDestinationMask3_Pasting"/>
         <TextBox Name="tBoxDestinationMask4" Grid.Row="1" Grid.Column="1" Width="37" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" TextAlignment="Center" Margin="143,325,0,0" PreviewTextInput="tBoxDestinationMask4_PreviewTextInput" TextChanged="tBoxDestinationMask4_TextChanged" DataObject.Pasting="tBoxDestinationMask4_Pasting"/>
 
-        <ComboBox Name="cbInterfaceDestination" Text="select" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="116" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,350,0,0" ItemsSource="{Binding InterfaceTypes}" SelectedItem="{Binding InterfaceTypes[2]}">
+        <ComboBox Name="cbInterfaceDestination" Text="select" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="116" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="20,350,0,0" ItemsSource="{Binding InterfaceTypesDestination}" SelectedItem="{Binding InterfaceTypesDestination[2]}">
         </ComboBox>
         <TextBox Name="tBoxInterfaceDestination" Text="0/0/0" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Width="40" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="140,350,0,0" PreviewTextInput="tBoxInterfaceDestination_PreviewTextInput" TextChanged="tBoxInterfaceDestination_TextChanged" DataObject.Pasting="tBoxInterfaceDestination_Pasting"/>
 

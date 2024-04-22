@@ -17,9 +17,9 @@
 
         <TextBlock Grid.Row="1" Name="tbSelectVPN" Text="Select VPN type" FontWeight="Bold" FontSize="16" Margin="20,85,0,0"/>
 
-        <CheckBox Grid.Row="1" Name="cbSiteToSite" Margin="20,124,0,0" Click="cbSiteToSite_Click"/>
+        <CheckBox Grid.Row="1" Name="cbSiteToSite" Margin="20,124,366,330" Click="cbSiteToSite_Click"/>
         <TextBlock Grid.Row="1" Name="tbSitetoSite" Text="Site-to-Site" FontSize="16" Margin="40,120,0,0"/>
-        <CheckBox Grid.Row="1" Name="cbRemoteAccess" Margin="20,144,0,0" Click="cbRemoteAccess_Click"/>
+        <CheckBox Grid.Row="1" Name="cbRemoteAccess" Margin="20,144,366,310" Click="cbRemoteAccess_Click"/>
         <TextBlock Grid.Row="1" Name="tbRemoteAccess" Text="Remote-Access" FontSize="16" Margin="40,140,0,0"/>
 
         <Image Margin="40,152,55,-16">

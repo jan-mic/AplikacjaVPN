@@ -151,17 +151,14 @@ namespace VpnApplication
                     catch { }
 
                     watch.Stop();
-                    if (watch.ElapsedMilliseconds > 2000)
+                    if (watch.ElapsedMilliseconds > 1000)
                     {
                         isConnected = false;
                         break;
                     }
                     watch.Start();
                 }
-                /////
-                ///
-                isConnected = true;
-                //////
+
                 if (isConnected)
                 {
                     uploadCommand(serialPort, "enable");
@@ -196,10 +193,6 @@ namespace VpnApplication
                     uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
                     uploadCommand(serialPort, "end");
 
-                    /////
-                    ///
-                    errorOccurred = false;
-                    /////
                     if(errorOccurred)
                     {
                         serialPortError.tbError.Text = "Error occurred during configuration:";

@@ -175,8 +175,13 @@ namespace VpnApplication
 
         private bool IsValidSiteToSite1()
         {
+            if (siteToSitePage1.tBoxPriority.Text.Length == 0 || siteToSitePage1.tBoxLifeTime.Text.Length == 0 || siteToSitePage1.tBoxPreSharedKey.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP1.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP2.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP3.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP4.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP1.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP2.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP3.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP4.Text.Length == 0)
+            {
+                return false;
+            }
             int.TryParse(siteToSitePage1.tBoxLifeTime.Text, out int numericLifeTime);
-            if (numericLifeTime < 60 || siteToSitePage1.tBoxPriority.Text.Length == 0 || siteToSitePage1.tBoxPreSharedKey.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP1.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP2.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP3.Text.Length == 0 || siteToSitePage1.tBoxSourcePeerIP4.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP1.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP2.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP3.Text.Length == 0 || siteToSitePage1.tBoxDestinationPeerIP4.Text.Length == 0)
+            int.TryParse(siteToSitePage1.tBoxPriority.Text, out int numericPriority);
+            if (numericLifeTime < 60 || numericPriority == 0)
             {
                 return false;
             }
@@ -189,7 +194,11 @@ namespace VpnApplication
             {
                 return false;
             }
-
+            int.TryParse(remoteAccessPage1.tBoxPriority.Text, out int numericPriority);
+            if (numericPriority == 0)
+            {
+                return false;
+            }
             if (!IsValidInterfaceFormat(remoteAccessPage1.tBoxInterface))
             {
                 return false;
@@ -200,12 +209,15 @@ namespace VpnApplication
 
         private bool IsValidSiteToSite2()
         {
-            int.TryParse(siteToSitePage2.tBoxLifeTime.Text, out int numericLifeTime);
-            if (numericLifeTime < 120 || siteToSitePage2.tBoxInterface.Text.Length < 5 || siteToSitePage2.tBoxInterfaceDestination.Text.Length < 5 || siteToSitePage2.tBoxLifeTime.Text.Length == 0 || siteToSitePage2.tBoxSourceIP1.Text.Length == 0 || siteToSitePage2.tBoxSourceIP2.Text.Length == 0 || siteToSitePage2.tBoxSourceIP3.Text.Length == 0 || siteToSitePage2.tBoxSourceIP4.Text.Length == 0 || siteToSitePage2.tBoxSourceMask1.Text.Length == 0 || siteToSitePage2.tBoxSourceMask2.Text.Length == 0 || siteToSitePage2.tBoxSourceMask3.Text.Length == 0 || siteToSitePage2.tBoxSourceMask4.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP1.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP2.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP3.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP4.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask1.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask2.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask3.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask4.Text.Length == 0)
+            if (siteToSitePage2.tBoxInterface.Text.Length < 5 || siteToSitePage2.tBoxInterfaceDestination.Text.Length < 5 || siteToSitePage2.tBoxLifeTime.Text.Length == 0 || siteToSitePage2.tBoxSourceIP1.Text.Length == 0 || siteToSitePage2.tBoxSourceIP2.Text.Length == 0 || siteToSitePage2.tBoxSourceIP3.Text.Length == 0 || siteToSitePage2.tBoxSourceIP4.Text.Length == 0 || siteToSitePage2.tBoxSourceMask1.Text.Length == 0 || siteToSitePage2.tBoxSourceMask2.Text.Length == 0 || siteToSitePage2.tBoxSourceMask3.Text.Length == 0 || siteToSitePage2.tBoxSourceMask4.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP1.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP2.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP3.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP4.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask1.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask2.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask3.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask4.Text.Length == 0)
             {
                 return false;
             }
-
+            int.TryParse(siteToSitePage2.tBoxLifeTime.Text, out int numericLifeTime);
+            if(numericLifeTime < 120)
+            {
+                return false;
+            }
             if (!IsValidInterfaceFormat(siteToSitePage2.tBoxInterface))
             {
                 return false;

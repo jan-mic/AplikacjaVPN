@@ -29,6 +29,7 @@ namespace VpnApplication
         public string[] AuthenticationAlgorithms { get; set; } = { "SHA", "MD5" };
         public string[] DiffieHellmanGroup { get; set; } = { "DH 1", "DH 2", "DH 5" };
         public string[] InterfaceTypes { get; set; } = { "Fast Ethernet", "Gigabit Ethernet", "Serial" };
+        public string[] InterfaceTypesDestination { get; set; } = { "Fast Ethernet", "Gigabit Ethernet", "Serial" };
         ValidationCheck validationCheck = new ValidationCheck();
 
         public SiteToSitePage2()
