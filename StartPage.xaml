@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VpnApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="510" d:DesignWidth="500"
+      d:DesignHeight="510" d:DesignWidth="420"
       Title="StartPage">
 
     <Grid>
         <Rectangle Fill="LightGray"/>
 
         <TextBlock Grid.Row="1" Name="tbRuleName" Text="Rule Name" FontWeight="Bold" FontSize="16" Margin="20,20,0,0"/>
-        <TextBox Name="tBoxRuleName" Grid.Row="1" Grid.Column="1" Width="160" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="120,23,0,0" MaxLength="21" PreviewTextInput="tBoxRuleName_PreviewTextInput" TextChanged="tBoxRuleName_TextChanged"/>
+        <TextBox Name="tBoxRuleName" Grid.Row="1" Grid.Column="1" Width="180" Height="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="120,23,0,0" MaxLength="21" PreviewTextInput="tBoxRuleName_PreviewTextInput" TextChanged="tBoxRuleName_TextChanged"/>
         
 
         <TextBlock Grid.Row="1" Name="tbSelectVPN" Text="Select VPN type" FontWeight="Bold" FontSize="16" Margin="20,85,0,0"/>

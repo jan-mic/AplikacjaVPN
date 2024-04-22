@@ -107,7 +107,7 @@ namespace VpnApplication
             addCommand2("set pfs " + siteToSite2.generateDiffieHellmanGroup());
             addCommand2("set transform-set " + startPage.tBoxRuleName.Text);
             addCommand2("exit");
-            addCommand2("interface " + siteToSite2.generateInterface());
+            addCommand2("interface " + siteToSite2.generateInterfaceDestination());
             addCommand2("crypto map " + startPage.tBoxRuleName.Text);
             addCommand2("end");
         }
@@ -361,7 +361,7 @@ namespace VpnApplication
                     uploadCommand(serialPort, "set pfs " + siteToSite2.generateDiffieHellmanGroup());
                     uploadCommand(serialPort, "set transform-set " + startPage.tBoxRuleName.Text);
                     uploadCommand(serialPort, "exit");
-                    uploadCommand(serialPort, "interface " + siteToSite2.generateInterface());
+                    uploadCommand(serialPort, "interface " + siteToSite2.generateInterfaceDestination());
                     uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
                     uploadCommand(serialPort, "end");
 

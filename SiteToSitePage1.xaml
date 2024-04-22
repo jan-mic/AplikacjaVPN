@@ -27,9 +27,9 @@
 
         <!-- phase 1 -->
         <TextBlock Grid.Row="0" Name="tbSelectVPN" Text="Phase 1 settings" FontWeight="Bold" FontSize="16" Margin="10,10,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbPriority" Text="Policy priority" FontSize="14" Margin="10,10,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbEncryptionAlgorithm" Text="Encryption algorithm" FontSize="14" Margin="10,35,0,0"/>
-        <TextBlock Grid.Row="1" Name="tbAuthenticationAlgorithm" Text="Authentication algorithm" FontSize="14" Margin="10,60,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbPriority" Text="Policy Priority" FontSize="14" Margin="10,10,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbEncryptionAlgorithm" Text="Encryption Algorithm" FontSize="14" Margin="10,35,0,0"/>
+        <TextBlock Grid.Row="1" Name="tbAuthenticationAlgorithm" Text="Authentication Algorithm" FontSize="14" Margin="10,60,0,0"/>
         <TextBlock Grid.Row="1" Name="tbDiffieHellman" Text="Key Group" FontSize="14" Margin="10,85,0,0"/>
         <TextBlock Grid.Row="1" Name="tbLifeTime" Text="SA Life Time" FontSize="14" Margin="10,110,0,0"/>
 

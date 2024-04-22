@@ -201,7 +201,7 @@ namespace VpnApplication
         private bool IsValidSiteToSite2()
         {
             int.TryParse(siteToSitePage2.tBoxLifeTime.Text, out int numericLifeTime);
-            if (numericLifeTime < 120 || siteToSitePage2.tBoxInterface.Text.Length < 5 || siteToSitePage2.tBoxLifeTime.Text.Length == 0 || siteToSitePage2.tBoxSourceIP1.Text.Length == 0 || siteToSitePage2.tBoxSourceIP2.Text.Length == 0 || siteToSitePage2.tBoxSourceIP3.Text.Length == 0 || siteToSitePage2.tBoxSourceIP4.Text.Length == 0 || siteToSitePage2.tBoxSourceMask1.Text.Length == 0 || siteToSitePage2.tBoxSourceMask2.Text.Length == 0 || siteToSitePage2.tBoxSourceMask3.Text.Length == 0 || siteToSitePage2.tBoxSourceMask4.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP1.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP2.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP3.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP4.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask1.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask2.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask3.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask4.Text.Length == 0)
+            if (numericLifeTime < 120 || siteToSitePage2.tBoxInterface.Text.Length < 5 || siteToSitePage2.tBoxInterfaceDestination.Text.Length < 5 || siteToSitePage2.tBoxLifeTime.Text.Length == 0 || siteToSitePage2.tBoxSourceIP1.Text.Length == 0 || siteToSitePage2.tBoxSourceIP2.Text.Length == 0 || siteToSitePage2.tBoxSourceIP3.Text.Length == 0 || siteToSitePage2.tBoxSourceIP4.Text.Length == 0 || siteToSitePage2.tBoxSourceMask1.Text.Length == 0 || siteToSitePage2.tBoxSourceMask2.Text.Length == 0 || siteToSitePage2.tBoxSourceMask3.Text.Length == 0 || siteToSitePage2.tBoxSourceMask4.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP1.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP2.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP3.Text.Length == 0 || siteToSitePage2.tBoxDestinationIP4.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask1.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask2.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask3.Text.Length == 0 || siteToSitePage2.tBoxDestinationMask4.Text.Length == 0)
             {
                 return false;
             }
@@ -210,7 +210,11 @@ namespace VpnApplication
             {
                 return false;
             }
-            
+            if (!IsValidInterfaceFormat(siteToSitePage2.tBoxInterfaceDestination))
+            {
+                return false;
+            }
+
             return true;
         }
 

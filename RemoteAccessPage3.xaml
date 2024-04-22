@@ -17,14 +17,14 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Fill="LightGray"/>
         <Rectangle Grid.Row="1" Grid.Column="0" Fill="LightGray"/>
 
-        <TextBlock Grid.Row="0" Name="tbGeneratedScript" Text="Generated configuration script" FontWeight="Bold" FontSize="16" Margin="15,10,0,0" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="0" Name="tbGeneratedScript" Text="Generated configuration script" FontWeight="Bold" FontSize="16" Margin="10,10,0,0" HorizontalAlignment="Left"/>
 
         <TextBlock Grid.Row="1" Name="tbRouter" Text="Router configuration script:" Margin="10,2.5,0,0"/>
         <Button Grid.Row="1" Name="btnSave" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="204,0,0,0" Content="Save" Click="btnSave_Click"/>
         <Button Grid.Row="1" Name="btnUploadConfiguration" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="269,0,0,0" Content="Upload" Click="btnUploadConfiguration_Click"/>
         <Button Grid.Row="1" Name="btnCopy" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="334,0,0,0" Content="Copy" Click="btnCopy_Click"/>
 
-        <TextBox Name="tBoxScript" Grid.Row="1" Margin="0,25,0,0" VerticalAlignment="Top" Width="384" Height="420" FontSize="13" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"/>
+        <TextBox Name="tBoxScript" Grid.Row="1" Margin="0,25,0,0" VerticalAlignment="Top" Width="384" Height="410" FontSize="13" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"/>
 
 
     </Grid>

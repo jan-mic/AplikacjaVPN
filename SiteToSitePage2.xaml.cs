@@ -113,6 +113,18 @@ namespace VpnApplication
             return Commands[cbInterface.SelectedIndex] + tBoxInterface.Text;
         }
 
+        public string generateInterfaceDestination()
+        {
+            Commands = new List<string>
+            {
+                "fastEthernet",
+                "gigabitEthernet",
+                "serial"
+            };
+
+            return Commands[cbInterfaceDestination.SelectedIndex] + tBoxInterfaceDestination.Text;
+        }
+
         private void tBoxLifeTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = validationCheck.IsDigit(e.Text);
@@ -394,6 +406,22 @@ namespace VpnApplication
         }
 
         private void tBoxDestinationMask4_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxInterfaceDestination_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[/]");
+            e.Handled = validationCheck.IsDigit(e.Text) && !regex.IsMatch(e.Text);
+        }
+
+        private void tBoxInterfaceDestination_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            validationCheck.RemoveSpaces(tBoxInterfaceDestination);
+        }
+
+        private void tBoxInterfaceDestination_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             e.CancelCommand();
         }

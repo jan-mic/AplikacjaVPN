@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VpnApplication"
         mc:Ignorable="d"
-        Title="Information" Height="120" Width="335"
+        Title="Information" Height="120" Width="315"
         ResizeMode="NoResize">
     <Grid>
         <Rectangle Fill="LightGray"/>
 
-        <TextBlock Name="tbInfo" Text="Please check the correctness of the entered data." FontSize="14" Margin="10,10,0,0" Width="305" Height="20" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Name="tbInfo" Text="Please check correctness of the entered data." FontSize="14" Margin="10,10,0,0" Width="290" Height="20" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         <Button Name="btnOK" Width="80" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Content="OK" Click="btnOK_Click"/>
     </Grid>

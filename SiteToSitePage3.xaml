@@ -17,7 +17,7 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Fill="LightGray"/>
         <Rectangle Grid.Row="1" Grid.Column="0" Fill="LightGray"/>
 
-        <TextBlock Grid.Row="0" Name="tbGeneratedScript" Text="Generated configuration scripts" FontWeight="Bold" FontSize="16" Margin="15,10,0,0" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="0" Name="tbGeneratedScript" Text="Generated configuration scripts" FontWeight="Bold" FontSize="16" Margin="10,10,0,0" HorizontalAlignment="Left"/>
 
         <!--ListView Name="lvScript" Grid.Row="1" Margin="10,5,10,5" /-->
         
