@@ -280,5 +280,65 @@ namespace VpnApplication
         {
             e.CancelCommand();
         }
+
+        private void tBoxMask1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxMask1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxMask1);
+        }
+
+        private void tBoxMask1_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxMask2_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxMask2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxMask2);
+        }
+
+        private void tBoxMask2_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxMask3_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxMask3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxMask3);
+        }
+
+        private void tBoxMask3_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void tBoxMask4_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = validationCheck.IsDigit(e.Text);
+        }
+
+        private void tBoxMask4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateIp(tBoxMask4);
+        }
+
+        private void tBoxMask4_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
     }
 }
