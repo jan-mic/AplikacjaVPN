@@ -134,11 +134,15 @@ namespace VpnApplication
         private void tBoxLifeTime_TextChanged(object sender, TextChangedEventArgs e)
         {
             validationCheck.RemoveSpaces(tBoxLifeTime);
-            int.TryParse(tBoxLifeTime.Text, out int numeric);
-            if (numeric > 86400)
+            if (tBoxLifeTime.Text.Length > 0)
             {
-                validationCheck.RemoveLastChar(tBoxLifeTime);
+                int.TryParse(tBoxLifeTime.Text, out int numeric);
+                if (numeric > 86400)
+                {
+                    validationCheck.RemoveLastChar(tBoxLifeTime);
+                }
             }
+            validationCheck.CheckFirstDigit(tBoxLifeTime);
         }
 
         private void tBoxInterface_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -150,6 +154,7 @@ namespace VpnApplication
         private void tBoxInterface_TextChanged(object sender, TextChangedEventArgs e)
         {
             validationCheck.RemoveSpaces(tBoxInterface);
+            validationCheck.CheckFirstDigitForInterface(tBoxInterface);
         }
 
         private void tBoxSourceIP1_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -315,11 +320,15 @@ namespace VpnApplication
         private void ValidateIp(TextBox textBox)
         {
             validationCheck.RemoveSpaces(textBox);
-            int.TryParse(textBox.Text, out int numeric);
-            if (numeric > 255)
+            if (textBox.Text.Length > 0)
             {
-                validationCheck.RemoveLastChar(textBox);
-            }
+                int.TryParse(textBox.Text, out int numeric);
+                if (numeric > 255)
+                {
+                    validationCheck.RemoveLastChar(textBox);
+                }
+                validationCheck.CheckIP(textBox);
+            }   
         }
         private void tBoxInterface_Pasting(object sender, DataObjectPastingEventArgs e)
         {
@@ -420,6 +429,7 @@ namespace VpnApplication
         private void tBoxInterfaceDestination_TextChanged(object sender, TextChangedEventArgs e)
         {
             validationCheck.RemoveSpaces(tBoxInterfaceDestination);
+            validationCheck.CheckFirstDigitForInterface(tBoxInterfaceDestination);
         }
 
         private void tBoxInterfaceDestination_Pasting(object sender, DataObjectPastingEventArgs e)
