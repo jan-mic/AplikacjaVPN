@@ -206,6 +206,9 @@ namespace VpnApplication
                         uploadCommand(serialPort, "interface " + remoteAccessPage1.generateInterface());
                         uploadCommand(serialPort, "crypto map " + startPage.tBoxRuleName.Text);
                         uploadCommand(serialPort, "end");
+                        uploadCommand(serialPort, "");
+                        uploadCommand(serialPort, "copy running-config startup-config");
+                        uploadCommand(serialPort, "");
 
                         if (errorOccurred)
                         {
