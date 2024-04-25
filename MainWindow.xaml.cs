@@ -22,7 +22,6 @@ namespace VpnApplication
         public SiteToSitePage1 siteToSitePage1 = new SiteToSitePage1();
         public SiteToSitePage2 siteToSitePage2 = new SiteToSitePage2();
         public SiteToSitePage3 siteToSitePage3 = new SiteToSitePage3();
-        //ValidationCheck validationCheck = new ValidationCheck();
 
         public MainWindow()
         {
@@ -36,14 +35,6 @@ namespace VpnApplication
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            //RemoteAccessPage remoteAccessPage = new RemoteAccessPage();
-            //this.Content = remoteAccessPage;
-            //if(VpnApplication.StartPage.)
-
-            //if(startPage.cbSiteToSite.IsChecked.Value)
-            //bool omg = startPage.cbSiteToSite.IsChecked.Value;
-            //MessageBox.Show(startPage.cbSiteToSite.IsChecked.ToString);
-
             ValidationInfo validationInfo = new ValidationInfo();
 
             if (currentPage == "startPage")

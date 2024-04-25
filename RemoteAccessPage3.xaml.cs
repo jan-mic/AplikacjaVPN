@@ -27,7 +27,6 @@ namespace VpnApplication
     public partial class RemoteAccessPage3 : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        //bool routerUpload = false;
         bool errorOccurred = false;
         string errorMessage = "";
 

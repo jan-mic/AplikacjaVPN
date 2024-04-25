@@ -37,8 +37,8 @@ namespace VpnApplication
         public class User
         {
             public int userID { get; set; }
-            public string userName { get; set; }
-            public string userPassword { get; set; }
+            public string? userName { get; set; }
+            public string? userPassword { get; set; }
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -69,7 +69,6 @@ namespace VpnApplication
             {
                 dgUsers.Items.Remove(users.Last());
                 users.Remove(users.Last());
-                //dgUsers.Items.RemoveAt(index);
             }
         }
 

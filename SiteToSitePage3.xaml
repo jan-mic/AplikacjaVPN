@@ -19,8 +19,6 @@
 
         <TextBlock Grid.Row="0" Name="tbGeneratedScript" Text="Generated configuration scripts" FontWeight="Bold" FontSize="16" Margin="10,10,0,0" HorizontalAlignment="Left"/>
 
-        <!--ListView Name="lvScript" Grid.Row="1" Margin="10,5,10,5" /-->
-        
         <TextBlock Grid.Row="1" Name="tbRouter1" Text="Router 1 configuration script:" Margin="10,2.5,0,0"/>
         <Button Grid.Row="1" Name="btnSave" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="204,0,0,0" Content="Save" Click="btnSave_Click"/>
         <Button Grid.Row="1" Name="btnUploadConfiguration" Width="60" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="269,0,0,0" Content="Upload" Click="btnUploadConfiguration_Click"/>
@@ -35,11 +33,6 @@
         <TextBox Name="tBoxScript" Grid.Row="1" Margin="0,25,0,0" VerticalAlignment="Top" Width="384" Height="180" FontSize="13" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"/>
 
         <TextBox Name="tBoxScript2" Grid.Row="1" Margin="0,245,0,0" VerticalAlignment="Top" Width="384" Height="180"  IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" FontSize="13"/>
-
-
- 
-
-
 
     </Grid>
 </Page>

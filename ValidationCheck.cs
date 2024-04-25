@@ -34,14 +34,12 @@ namespace VpnApplication
 
         public bool IsDigit(string text)
         {
-            //Regex regex = new Regex("[^0-9]+");
             Regex regex = new Regex("[0-9]");
             return !regex.IsMatch(text);
         }
 
         public bool IsLetter(string text)
         {
-            //Regex regex = new Regex("[^a-zA-z]+");
             Regex regex = new Regex("[a-zA-z]");
             return !regex.IsMatch(text);
         }
@@ -91,43 +89,5 @@ namespace VpnApplication
                 }
             }
         }
-
-
-        /*//////////////////////
-
-        public bool IsLetterOrDigit(Key key)
-        {
-            return !IsLetter(key) && !IsNumber(key);
-        }
-        public bool IsNumber(Key key)
-        {
-            if (key < Key.D0 || key > Key.D9)
-            {
-                if (key < Key.NumPad0 || key > Key.NumPad9)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public bool IsLetter(Key key)
-        {
-            if (key < Key.A || key > Key.Z)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool IsLetter2(Key key)
-        {
-            //Char.IsLetterOrDigit(key.Char);
-            if (key < Key.A || key > Key.Z)
-            {
-                return false;
-            }
-            return true;
-        }*/
     }
 }

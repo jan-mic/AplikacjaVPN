@@ -136,7 +136,6 @@ namespace VpnApplication
                 number3 = 255 - int.Parse(mask3.Text);
                 number4 = 255 - int.Parse(mask4.Text);
             }
-            //string a=number1.ToString();
             return number1 + "." + number2 + "." + number3 + "." + number4;
         }
 
@@ -256,7 +255,7 @@ namespace VpnApplication
                         catch { }
 
                         watch.Stop();
-                        if (watch.ElapsedMilliseconds > 2000)
+                        if (watch.ElapsedMilliseconds > 1000)
                         {
                             isConnected = false;
                             break;
@@ -367,7 +366,7 @@ namespace VpnApplication
                         catch { }
 
                         watch.Stop();
-                        if (watch.ElapsedMilliseconds > 2000)
+                        if (watch.ElapsedMilliseconds > 1000)
                         {
                             isConnected = false;
                             break;
