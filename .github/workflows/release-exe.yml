@@ -31,6 +31,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: Najnowsza wersja (Windows x64)
+          name: VPN App - Windows Desktop
           body: Automatycznie zbudowany plik wykonywalny `.exe` (nie wymaga instalacji .NET).
           files: publish/*.exe
